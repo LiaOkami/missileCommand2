@@ -1,0 +1,18 @@
+#Compiled Object File
+*.o
+obj
+
+#Precompiled Headers
+*.gch
+
+#Executables
+*.out
+bin
+
+#tmp files
+#*/#
+*~
+.#*
+
+*core*
+*.layout
