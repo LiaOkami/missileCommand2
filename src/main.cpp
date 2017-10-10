@@ -1,4 +1,9 @@
-int main()
+#include "MissileCommand.hh"
+
+int	main()
 {
-    return (0);
+  MissileCommand	game;
+
+  game.launch();
+  return (0);
 }
