@@ -5,7 +5,7 @@
 ## Login   <pierrick.garcia@u-psud.fr>
 ##
 ## Started on  Tue Oct 10 13:52:27 2017 Pierrick Garcia
-## Last update Tue Oct 10 14:10:56 2017 Pierrick Garcia
+## Last update Thu Oct 19 23:05:56 2017 Pierrick Garcia
 ##
 
 COMP		= g++
@@ -49,7 +49,7 @@ $(NAME): $(OBJ)
 	 ($(ECHO) $(GREEN) "[OK]" $(BLUE) $@ $(DEFAULT)) || \
 	 ($(ECHO) $(RED) "[XX]" $(BLUE) $@ $(DEFAULT))
 
-debug:
+Debug:
 	$(COMP) -o $(NAME).debug $(SRC) $(INCLUDES) $(CFLAGS) $(LDFLAGS) -g
 
 clean:
