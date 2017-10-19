@@ -18,3 +18,4 @@ missileCommand
 *core*
 *.layout
 doxygen/html
+*.depend
