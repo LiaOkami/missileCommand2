@@ -5,7 +5,7 @@
 ## Login   <pierrick.garcia@u-psud.fr>
 ##
 ## Started on  Tue Oct 10 13:52:27 2017 Pierrick Garcia
-## Last update Fri Oct 20 10:16:11 2017 Pierrick Garcia
+## Last update Fri Oct 20 13:49:52 2017 Pierrick Garcia
 ##
 
 COMP		= g++
@@ -53,7 +53,7 @@ clean:
 	@$(ECHO) $(BLUE) "Cleaning object files" $(DEFAULT)
 
 fclean: clean
-	@$(RM) $(NAME) $(NAME).debug
+	@$(RM) $(NAME)
 	@$(ECHO) $(BLUE) "Cleaning binary" $(DEFAULT)
 
 re: fclean all
