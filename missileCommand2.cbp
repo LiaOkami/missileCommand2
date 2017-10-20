@@ -16,14 +16,12 @@
 		</MakeCommands>
 		<Build>
 			<Target title="debug">
-				<Option output="launcher" prefix_auto="1" extension_auto="1" />
+				<Option output="missileCommand" prefix_auto="1" extension_auto="1" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 			</Target>
-		</Build>
-		<Build>
 			<Target title="missileCommand">
-				<Option output="launcher" prefix_auto="1" extension_auto="1" />
+				<Option output="missileCommand" prefix_auto="1" extension_auto="1" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 			</Target>
