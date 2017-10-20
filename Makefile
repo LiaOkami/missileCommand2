@@ -5,7 +5,7 @@
 ## Login   <pierrick.garcia@u-psud.fr>
 ##
 ## Started on  Tue Oct 10 13:52:27 2017 Pierrick Garcia
-## Last update Fri Oct 20 13:49:52 2017 Pierrick Garcia
+## Last update Fri Oct 20 15:16:46 2017 Pierrick Garcia
 ##
 
 COMP		= g++
@@ -20,7 +20,7 @@ RM		= rm -f
 
 NAME		= missileCommand
 
-LDFLAGS		+= -Llib -lsfml-graphics -lsfml-window -lsfml-system
+LDFLAGS		+= -lsfml-graphics -lsfml-window -lsfml-system
 
 DBGFLAGS	= -g3
 
