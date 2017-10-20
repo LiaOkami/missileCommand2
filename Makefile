@@ -5,15 +5,14 @@
 ## Login   <pierrick.garcia@u-psud.fr>
 ##
 ## Started on  Tue Oct 10 13:52:27 2017 Pierrick Garcia
-## Last update Thu Oct 19 23:05:56 2017 Pierrick Garcia
+## Last update Fri Oct 20 10:16:11 2017 Pierrick Garcia
 ##
 
 COMP		= g++
 
 EDITOR		= emacs -nw
 
-CFLAGS		+= -W -Wall -Wextra -Werror
-CFLAGS		+= -ldl -lpthread
+CFLAGS		+= -W -Wall -Wextra -Werror -O3
 
 INCLUDES	+= -I./include
 
@@ -40,7 +39,7 @@ RED		= "\033[0;31m"
 all: $(NAME)
 
 %.o: %.cpp
-	@$(COMP) -o $@ -c $< $(CFLAGS) $(LDFLAGS) $(INCLUDES) $(INCLUDES) && \
+	@$(COMP) -o $@ -c $< $(CFLAGS) $(LDFLAGS) $(INCLUDES) && \
 	 ($(ECHO) $(GREEN) "[OK]" $(BLUE) $@ $(DEFAULT)) || \
 	 ($(ECHO) $(RED) "[XX]" $(BLUE) $@ $(DEFAULT))
 
@@ -48,9 +47,6 @@ $(NAME): $(OBJ)
 	@$(COMP) $(OBJ) -o $@ $(CFLAGS) $(LDFLAGS) $(INCLUDES) && \
 	 ($(ECHO) $(GREEN) "[OK]" $(BLUE) $@ $(DEFAULT)) || \
 	 ($(ECHO) $(RED) "[XX]" $(BLUE) $@ $(DEFAULT))
-
-Debug:
-	$(COMP) -o $(NAME).debug $(SRC) $(INCLUDES) $(CFLAGS) $(LDFLAGS) -g
 
 clean:
 	@$(RM) $(OBJ)
@@ -67,7 +63,7 @@ rec: all clean
 edit:
 	$(EDITOR) $(SRC)
 
-dbg:	CFLAGS += $(DBGFLAGS)
-dbg:	re
+debug:	CFLAGS += $(DBGFLAGS)
+debug:	re
 
-.PHONY: all clean fclean re rec edit dbg
+.PHONY: all clean fclean re rec edit debug
