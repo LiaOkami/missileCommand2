@@ -3,9 +3,9 @@
 
 #include <vector>
 using namespace std;
-
 #include <cstdlib>
 #include <ctime>
+#include <iostream>
 
 int     main()
 {
@@ -30,16 +30,28 @@ int     main()
 
     sf::Vector2u tailleF = window.getSize();
 
+    // Images
+    sf::Texture missile;
+    sf::Sprite sprite_missile;
+    if(!missile.loadFromFile("Images/missile_01.png"))
+    {
+        cout << "Erreur chargement texture (missile_01.png)" << endl;
+    }
+    sprite_missile.setTexture(missile);
+
     while (window.isOpen())
     {
         window.clear();
         window.draw(cercle);
         window.draw(pointeurSouris);
+        window.draw(sprite_missile);
+
         int tabCSize = tabC.size();
         for(int cpt=0; cpt < tabCSize; cpt++)
         {
             window.draw(tabC[cpt]);
         }
+
         window.display(); //Affichage
 
         /* Boucle d'évènements */
