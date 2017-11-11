@@ -24,32 +24,32 @@ int     main()
     pointeurSouris.setFillColor(sf::Color::Red);
 
     sf::Clock chrono, apparition;
-    sf::Time dureeMax = sf::microseconds(10), dureeApparition = sf::seconds(3);
+    sf::Time dureeMax = sf::milliseconds(100), dureeApparition = sf::seconds(1);
 
     vector<sf::CircleShape> tabC(0);
+    vector <sf::Sprite> tabMissiles(0);
 
-    sf::Vector2u tailleF = window.getSize();
+    sf::Vector2u tailleF = window.getSize(); //taille de la fenêtre
 
-    // Images
+    // Chargement de l'image
     sf::Texture missile;
-    sf::Sprite sprite_missile;
-    if(!missile.loadFromFile("Images/missile_01.png"))
+    if(!missile.loadFromFile("Images/missile_01.png", sf::IntRect(0,50,253,78))) //[1] Chemin de l'image, [2] Cadre de l'image
     {
         cout << "Erreur chargement texture (missile_01.png)" << endl;
     }
-    sprite_missile.setTexture(missile);
+
+    cout << "taille fenetre : x " << tailleF.x << " y " << tailleF.y << endl;
 
     while (window.isOpen())
     {
+        /* Instructions d'affichage */
         window.clear();
-        window.draw(cercle);
         window.draw(pointeurSouris);
-        window.draw(sprite_missile);
 
-        int tabCSize = tabC.size();
-        for(int cpt=0; cpt < tabCSize; cpt++)
+        int tabMSize = tabMissiles.size();
+        for (int cpt = 0; cpt < tabMSize; cpt++)
         {
-            window.draw(tabC[cpt]);
+            window.draw(tabMissiles[cpt]);
         }
 
         window.display(); //Affichage
@@ -62,49 +62,75 @@ int     main()
             if (event.type == sf::Event::KeyPressed)
                 window.close();
 
-            /** \brief Si l'utilisateur clique sur le BGS, met à jour la position du cercle blanc
-            */
-            if (event.type == sf::Event::MouseButtonPressed)
-            {
-                if (event.mouseButton.button == sf::Mouse::Left)
-                {
-                    cercle.setPosition(event.mouseButton.x-50.0, event.mouseButton.y-50.0);
-                }
-            }
-            /** \brief met à jour la position du pointeur avec la position du curseur de la souris
-            */
+
+            /** \brief met à jour la position du pointeur avec la position du curseur de la souris */
             sf::Vector2f positionSouris(sf::Mouse::getPosition(window));
             if (event.MouseMoved)
             {
                 pointeurSouris.setPosition(positionSouris);
             }
-            /** \brief Si l'utilisateur clique sur le cercle, il est supprimé */
+
+
+            /** \brief Si l'utilisateur clique sur le missile, il est supprimé */
+
             if(event.type == sf::Event::MouseButtonPressed)
             {
-                if (event.mouseButton.button == sf::Mouse::Right && tabC.size()>0)
+                if (event.mouseButton.button == sf::Mouse::Right && tabMissiles.size()>0)
                 {
-                    tabC.pop_back();
+                    tabMSize = tabMissiles.size();
+                    for(int cpt1 = 0; cpt1 < tabMSize; cpt1++)
+                    {
+                        //vérification si coordonnées de la souris est sur la zone d'une sprite
+                    }
+                    tabMissiles.pop_back();
                 }
             }
         }
 
-        /** \brief fait bouger le cercle blanc*/
+        /* Mise à jour des éléments */
+
+        /** \brief fait bouger les missiles*/
         if ( chrono.getElapsedTime() > dureeMax)
         {
-            cercle.move(0.01,0.01);
+            tabMSize = tabMissiles.size();
+            for (int cpt = 0; cpt < tabMSize; cpt++)
+            {
+                tabMissiles[cpt].move(0,7);
+            }
             chrono.restart();
         }
 
-        /** \brief crée un Cercle lorsque la duée d'apparition est écoulée */
+
+        /** \brief ajoute un missile au tableau de missiles lorsque la duée d'apparition est écoulée */
         if (apparition.getElapsedTime() > dureeApparition)
         {
-            sf::CircleShape nveauCercle(30.0);
-            nveauCercle.setFillColor(sf::Color::Blue);
-            int x = (rand()%(tailleF.y-((int)nveauCercle.getRadius())*2));
-            int y = (rand()%(tailleF.y-((int)nveauCercle.getRadius())*2));
-            nveauCercle.setPosition(x,y);
-            tabC.push_back(nveauCercle);
+            sf::Sprite sprite_missile;
+            int x = (rand()%(tailleF.x-78/2)) +78/2;
+
+            sprite_missile.setTexture(missile);
+            sprite_missile.scale(0.5,0.5);
+            sprite_missile.setRotation(90.0);
+            sprite_missile.setPosition(x,0);
+            tabMissiles.push_back(sprite_missile);
             apparition.restart();
+            cout << "Création d'un missile" << endl;
+        }
+
+
+        /** \brief supprime les missiles en dehors de la fenêtre */
+        tabMSize = tabMissiles.size();
+        for(int cpt1 = 0; cpt1 < tabMSize; cpt1++)
+        {
+            if(tabMissiles[cpt1].getPosition().y > tailleF.y-50)
+            {
+                cout << "Missile sorti ( " << tabMissiles[cpt1].getPosition().y << " > " << tailleF.y-50 << " ). ";
+                for(int cpt2 = cpt1; cpt2 < tabMSize-1; cpt2++)
+                {
+                    tabMissiles[cpt2] = tabMissiles[cpt2+1];
+                }
+                cout << "Suppression d'un missile" << endl;
+                tabMissiles.pop_back();
+            }
         }
 
     }
