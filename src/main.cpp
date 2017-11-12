@@ -17,18 +17,13 @@ int     main()
     srand(time(NULL));
 
     /* Initialisations */
-    sf::CircleShape       cercle(50.0);
-    cercle.setFillColor(sf::Color::White);
-
     sf::CircleShape     pointeurSouris(10.0);
     pointeurSouris.setFillColor(sf::Color::Red);
 
     sf::Clock chrono, apparition;
     sf::Time dureeMax = sf::milliseconds(100), dureeApparition = sf::seconds(1);
 
-    vector<sf::CircleShape> tabC(0);
     vector <sf::Sprite> tabMissiles(0);
-
     sf::Vector2u tailleF = window.getSize(); //taille de la fenêtre
 
     // Chargement de l'image
@@ -38,7 +33,6 @@ int     main()
         cout << "Erreur chargement texture (missile_01.png)" << endl;
     }
 
-    cout << "taille fenetre : x " << tailleF.x << " y " << tailleF.y << endl;
 
     while (window.isOpen())
     {
@@ -75,14 +69,23 @@ int     main()
 
             if(event.type == sf::Event::MouseButtonPressed)
             {
-                if (event.mouseButton.button == sf::Mouse::Right && tabMissiles.size()>0)
+                if (event.mouseButton.button == sf::Mouse::Left && tabMissiles.size()>0)
                 {
                     tabMSize = tabMissiles.size();
-                    for(int cpt1 = 0; cpt1 < tabMSize; cpt1++)
+                    sf::Vector2f positionSouris2(sf::Mouse::getPosition(window));
+                    for(int cpt1 = 0; cpt1 < tabMSize; cpt1++) // vérification pour chaque missile
                     {
-                        //vérification si coordonnées de la souris est sur la zone d'une sprite
+                        if(tabMissiles[cpt1].getGlobalBounds().contains(positionSouris2)) // Si la souris est sur le sprite, décalage et suppression
+                        {
+                            cout << "Missile cliqué. ";
+                            for(int cpt2 = cpt1; cpt2 < tabMSize-1; cpt2++)
+                            {
+                                tabMissiles[cpt2] = tabMissiles[cpt2+1];
+                            }
+                            cout << "Missile supprimé." << endl;
+                            tabMissiles.pop_back();
+                        }
                     }
-                    tabMissiles.pop_back();
                 }
             }
         }
@@ -128,7 +131,7 @@ int     main()
                 {
                     tabMissiles[cpt2] = tabMissiles[cpt2+1];
                 }
-                cout << "Suppression d'un missile" << endl;
+                cout << "Missile supprimé." << endl;
                 tabMissiles.pop_back();
             }
         }
