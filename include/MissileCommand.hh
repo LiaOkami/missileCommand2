@@ -32,6 +32,10 @@ public:
    * L'intégralité du jeu est exécutée dans cette méthode.
    */
   void	launch();
+
+  void	update();
+
+  void	draw();
 };
 
 #endif
