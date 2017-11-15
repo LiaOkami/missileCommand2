@@ -15,7 +15,7 @@ class Object
 public:
   /** \brief Constructeur par défaut
    */
-  Object(int x, int y, const std::string &key);
+  Object(float x, float y, const std::string &key);
 
   void	draw(const SFMLHandler& handler) const;
 };

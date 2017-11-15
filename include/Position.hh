@@ -12,8 +12,8 @@
  */
 struct Position
 {
-  uint16_t	x;
-  uint16_t	y;
+  float	x;
+  float	y;
 };
 
 #endif

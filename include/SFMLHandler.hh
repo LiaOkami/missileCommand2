@@ -5,6 +5,8 @@
 #ifndef _SFMLHANDLER_HH_
 # define _SFMLHANDLER_HH_
 
+# include "Position.hh"
+
 /** \brief Classe encapsulant la bibliothèque SFML
  *  \author Etienne Berrié
  */
@@ -23,7 +25,7 @@ public:
 
   void	addAsset(const std::string & key, const std::string & filename);
 
-  void	draw(const std::string & key, int x, int y);
+  void	draw(const std::string & key, Position pos);
 };
 
 #endif
