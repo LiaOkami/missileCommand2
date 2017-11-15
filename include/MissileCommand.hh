@@ -5,6 +5,17 @@
 #ifndef _MISSILECOMMAND_HH_
 # define _MISSILECOMMAND_HH_
 
+# include <stdint.h>
+
+/** \brief Structure représentant la Position d'un Object
+ *  \author Pierrick Garcia
+ */
+struct Position
+{
+  uint16_t	_x;
+  uint16_t	_y;
+};
+
 /** \brief Classe contenant tout le jeu Missile Command
  *  \author Pierrick Garcia
  */
