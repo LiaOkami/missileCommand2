@@ -12,10 +12,15 @@
  */
 class SFMLHhandler
 {
+private:
+    sf::RenderWindow _window;
+
 public:
   /** \brief Constructeur par défaut
+   *
+   * Arguments : largeur de la fenêtre, hauteur de la fenêtre, titre de la fenêtre, style de la fenêtre (de type sf::Style)
    */
-  SFMLHandler();
+  SFMLHandler(int width = 200, int height = 200, string title = "MissileCommand", sf::Style windowStyle = sf::Style::Default);
 
   /** \brief Destructeur par défaut
    */
