@@ -5,15 +5,14 @@
 #include "SFMLHandler.hh"
 
 #include <map>
+#include <iostream>
 using namespace std;
 
 /* Constructeur */
-SFMLHandler::SFMLHandler(int width, int height, string title)
+SFMLHandler::SFMLHandler(int width, int height, string title) :
+    _window(sf::VideoMode(width, height), title), _mapAssets()
 {
-    sf::RenderWindow window(sf::VideoMode(width, height), title);
-    _window = window;
-    map<string,sf::Sprite> mapA;
-    _mapAssets = mapA;
+
 }
 
 /* Destructeur */
@@ -47,7 +46,7 @@ void SFMLHandler::draw(const std::string & key, Position pos)
 {
     sf::Sprite spriteDraw;
     spriteDraw = _mapAssets[key];
-    spriteDraw.setPosition(pos.x, pos.y)
+    spriteDraw.setPosition(pos.x, pos.y);
     _window.draw(spriteDraw);
 }
 

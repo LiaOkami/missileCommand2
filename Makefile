@@ -25,7 +25,8 @@ LDFLAGS		+= -lsfml-graphics -lsfml-window -lsfml-system
 DBGFLAGS	= -g3
 
 SRC		= src/main.cpp \
-		  src/MissileCommand.cpp
+		  src/MissileCommand.cpp \
+		  src/SFMLHandler.cpp
 
 OBJ		= $(SRC:.cpp=.o)
 

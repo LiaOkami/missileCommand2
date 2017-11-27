@@ -5,6 +5,7 @@
 #ifndef _SFMLHANDLER_HH_
 # define _SFMLHANDLER_HH_
 
+#include <SFML/Graphics.hpp>
 # include "Position.hh"
 
 #include <map>
@@ -13,7 +14,7 @@ using namespace std;
 /** \brief Classe encapsulant la bibliothèque SFML
  *  \author Etienne Berrié
  */
-class SFMLHhandler
+class SFMLHandler
 {
 private:
     sf::RenderWindow _window;
@@ -25,9 +26,9 @@ public:
    * \param largeur de la fenêtre
    * \param hauteur de la fenêtre
    * \param titre de la fenêtre
-   * \param style de la fenêtre (de type sf::Style)
+   * \param style de la fenêtre (optionnel, à faire plus tard)
    */
-  SFMLHandler(int width = 200, int height = 200, string title = "MissileCommand", sf::Style windowStyle = sf::Style::Default);
+  SFMLHandler(int width = 200, int height = 200, string title = "MissileCommand");
 
   /** \brief Destructeur par défaut
    */
