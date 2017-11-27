@@ -37,7 +37,7 @@ int     main()
     while (window.getWindow().isOpen())
     {
 	/* Instructions d'affichage */
-	window.getWindow().clear();
+	window.clearWindow();
 	window.getWindow().draw(pointeurSouris);
 
 	int tabMSize = tabMissiles.size();
