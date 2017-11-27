@@ -54,6 +54,8 @@ public:
    *
    */
   void  display();
+
+  sf::RenderWindow& getWindow();
 };
 
 #endif

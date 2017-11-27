@@ -1,5 +1,5 @@
-#include <SFML/Graphics.hpp>
 #include "MissileCommand.hh"
+#include "SFMLHandler.hh"
 
 #include <vector>
 using namespace std;
@@ -9,12 +9,12 @@ using namespace std;
 
 int     main()
 {
-    MissileCommand        game;
-    sf::RenderWindow      window(sf::VideoMode(400, 400), "Missile Command");
-    window.setPosition(sf::Vector2i(200,200));
-    sf::Event             event;
-
     srand(time(NULL));
+
+    MissileCommand        game;
+    sf::Event             event;
+    SFMLHandler           window;
+
 
     /* Initialisations */
     sf::CircleShape     pointeurSouris(10.0);
@@ -24,7 +24,7 @@ int     main()
     sf::Time dureeMax = sf::milliseconds(100), dureeApparition = sf::seconds(1);
 
     vector <sf::Sprite> tabMissiles(0);
-    sf::Vector2u tailleF = window.getSize(); //taille de la fenêtre
+    sf::Vector2u tailleF = window.getWindow().getSize(); //taille de la fenêtre
 
     // Chargement de l'image
     sf::Texture missile;
@@ -34,31 +34,31 @@ int     main()
     }
 
 
-    while (window.isOpen())
+    while (window.getWindow().isOpen())
     {
 	/* Instructions d'affichage */
-	window.clear();
-	window.draw(pointeurSouris);
+	window.getWindow().clear();
+	window.getWindow().draw(pointeurSouris);
 
 	int tabMSize = tabMissiles.size();
 	for (int cpt = 0; cpt < tabMSize; cpt++)
 	{
-	    window.draw(tabMissiles[cpt]);
+	    window.getWindow().draw(tabMissiles[cpt]);
 	}
 
 	window.display(); //Affichage
 
 	/* Boucle d'évènements */
-	while (window.pollEvent(event))
+	while (window.getWindow().pollEvent(event))
 	{
 	    if (event.type == sf::Event::Closed) //
-		window.close();
+		window.getWindow().close();
 	    if (event.type == sf::Event::KeyPressed)
-		window.close();
+		window.getWindow().close();
 
 
 	    /** \brief met à jour la position du pointeur avec la position du curseur de la souris */
-	    sf::Vector2f positionSouris(sf::Mouse::getPosition(window));
+	    sf::Vector2f positionSouris(sf::Mouse::getPosition(window.getWindow()));
 	    if (event.MouseMoved)
 	    {
 		pointeurSouris.setPosition(positionSouris);
@@ -72,7 +72,7 @@ int     main()
 		if (event.mouseButton.button == sf::Mouse::Left && tabMissiles.size()>0)
 		{
 		    tabMSize = tabMissiles.size();
-		    sf::Vector2f positionSouris2(sf::Mouse::getPosition(window));
+		    sf::Vector2f positionSouris2(sf::Mouse::getPosition(window.getWindow()));
 		    for(int cpt1 = 0; cpt1 < tabMSize; cpt1++) // vérification pour chaque missile
 		    {
 			if(tabMissiles[cpt1].getGlobalBounds().contains(positionSouris2)) // Si la souris est sur le sprite, décalage et suppression

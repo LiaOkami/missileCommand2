@@ -12,7 +12,7 @@ using namespace std;
 SFMLHandler::SFMLHandler(int width, int height, string title) :
     _window(sf::VideoMode(width, height), title), _mapAssets()
 {
-
+    cout << "Création de la fenêtre" << endl;
 }
 
 /* Destructeur */
@@ -53,4 +53,9 @@ void SFMLHandler::draw(const std::string & key, Position pos)
 void SFMLHandler::display()
 {
     _window.display();
+}
+
+sf::RenderWindow& SFMLHandler::getWindow()
+{
+    return _window;
 }
