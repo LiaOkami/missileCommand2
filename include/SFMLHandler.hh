@@ -7,6 +7,9 @@
 
 # include "Position.hh"
 
+#include <map>
+using namespace std;
+
 /** \brief Classe encapsulant la bibliothèque SFML
  *  \author Etienne Berrié
  */
@@ -14,11 +17,15 @@ class SFMLHhandler
 {
 private:
     sf::RenderWindow _window;
+    map<string,sf::Sprite> _mapAssets;
 
 public:
   /** \brief Constructeur par défaut
    *
-   * Arguments : largeur de la fenêtre, hauteur de la fenêtre, titre de la fenêtre, style de la fenêtre (de type sf::Style)
+   * \param largeur de la fenêtre
+   * \param hauteur de la fenêtre
+   * \param titre de la fenêtre
+   * \param style de la fenêtre (de type sf::Style)
    */
   SFMLHandler(int width = 200, int height = 200, string title = "MissileCommand", sf::Style windowStyle = sf::Style::Default);
 
@@ -26,11 +33,26 @@ public:
    */
   ~SFMLHandler();
 
+  /** \brief Efface les objets affichés dans la fenêtre
+   */
   void	clearWindow();
 
-  void	addAsset(const std::string & key, const std::string & filename);
+  /** \brief Charge un asset dans la map d'assets;
+   * \param chaine, clé d'une sprite
+   * \param chaine, chemin relatif de l'emplacement de l'asset
+   */
+  void	loadAsset(const std::string & key, const std::string & filename);
 
+  /** \brief Dessine l'objet dans la fenêtre
+   * \param chaine, clé d'une sprite
+   * \param Position, position de l'objet à dessiner
+   */
   void	draw(const std::string & key, Position pos);
+
+  /** \brief Affiche l'ensemble des objet dessinés
+   *
+   */
+  void  display();
 };
 
 #endif
