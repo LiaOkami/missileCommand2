@@ -32,6 +32,7 @@
 		<Unit filename="include/SFMLHandler.hh" />
 		<Unit filename="src/MissileCommand.cpp" />
 		<Unit filename="src/SFMLHandler.cpp" />
+		<Unit filename="src/Object.cpp" />
 		<Unit filename="src/main.cpp" />
 		<Extensions>
 			<code_completion />
