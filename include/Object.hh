@@ -6,7 +6,7 @@
 # define _OBJECT_HH_
 
 # include "SFMLHandler.hh"
-#include "position.hh"
+#include "Position.hh"
 using namespace std;
 
 /** \brief Classe parente de tous les objets affichables
@@ -16,18 +16,24 @@ class Object
 {
 private:
 
-Position _pos;
-string _key;
+    Position _pos;
+    string _key;
 
 
 
 public:
-  /** \brief Constructeur par défaut
+    /** \brief Constructeur par défaut
+    *
+    *\param float x abcisse de l'objet
+    *\param float y ordonnée de l'objet
+    *\param const string key
+    *\return
+    *Construction de l'objet, ayant pour attributs une position, abcisse et ordonnée, et une key
+    *
+    */
+    Object(float x, float y, const std::string &key);
 
-   */
-  Object(float x, float y, const std::string &key);
-
-  void	draw(const SFMLHandler& handler) const;
+    void	draw(SFMLHandler& handler) const;
 };
 
 #endif
