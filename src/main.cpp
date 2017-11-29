@@ -11,50 +11,49 @@ int     main()
 {
     srand(time(NULL));
 
+    /* Initialisations */
+
     MissileCommand        game;
     sf::Event             event;
-    SFMLHandler           window;
+    SFMLHandler           window(400,400);
+    window.setPosition(600,200);
 
-
-    /* Initialisations */
+    // Pointeur de la souris
     sf::CircleShape     pointeurSouris(10.0);
     pointeurSouris.setFillColor(sf::Color::Red);
+    Position cursorTarget; //version pour le sprite "TARGET"
+    Position p; p.x=50; p.y=50; //Test pour le Map de Sprites
 
+    // Horloges
     sf::Clock chrono, apparition;
     sf::Time dureeMax = sf::milliseconds(100), dureeApparition = sf::seconds(1);
 
+    // Vecteur de Sprites-missiles
     vector <sf::Sprite> tabMissiles(0);
     sf::Vector2u tailleF = window.getWindow().getSize(); //taille de la fenêtre
 
-    // Chargement de l'image
+    /* Chargement des Assets */
     sf::Texture missile;
     if(!missile.loadFromFile("assets/Missile.png", sf::IntRect(0,50,253,78))) //[1] Chemin de l'image, [2] Cadre de l'image
     {
 	cout << "Erreur chargement texture (missile_01.png)" << endl;
     }
 
+    window.loadAsset("MISSILE","assets/Missile.png",0.5, 90, 0, 50, 253, 78);
+    window.loadAsset("TARGET", "assets/cible.png");
+
+
 
     while (window.getWindow().isOpen())
     {
-	/* Instructions d'affichage */
-	window.clearWindow();
-	window.getWindow().draw(pointeurSouris);
-
 	int tabMSize = tabMissiles.size();
-	for (int cpt = 0; cpt < tabMSize; cpt++)
-	{
-	    window.getWindow().draw(tabMissiles[cpt]);
-	}
-
-	window.display(); //Affichage
-
 	/* Boucle d'évènements */
 	while (window.getWindow().pollEvent(event))
 	{
-	    if (event.type == sf::Event::Closed) //
-		window.getWindow().close();
+	    if (event.type == sf::Event::Closed)
+		window.close();
 	    if (event.type == sf::Event::KeyPressed)
-		window.getWindow().close();
+		window.close();
 
 
 	    /** \brief met à jour la position du pointeur avec la position du curseur de la souris */
@@ -62,6 +61,9 @@ int     main()
 	    if (event.MouseMoved)
 	    {
 		pointeurSouris.setPosition(positionSouris);
+
+		cursorTarget.x = positionSouris.x; //Version pour le sprite "TARGET" du curseur de la souris
+		cursorTarget.y = positionSouris.y;
 	    }
 
 
@@ -135,6 +137,21 @@ int     main()
 		tabMissiles.pop_back();
 	    }
 	}
+
+	/* Instructions d'affichage */
+	window.clearWindow();
+	window.getWindow().draw(pointeurSouris);
+
+	//window.draw("TARGET",cursorTarget); // Tests appels SFMLHandler.draw
+	window.draw("MISSILE",p);
+
+	tabMSize = tabMissiles.size();
+	for (int cpt = 0; cpt < tabMSize; cpt++)
+	{
+	    window.getWindow().draw(tabMissiles[cpt]);
+	}
+
+	window.display();
 
     }
     game.launch();

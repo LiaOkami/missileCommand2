@@ -19,6 +19,7 @@ class SFMLHandler
 private:
     sf::RenderWindow _window;
     map<string,sf::Sprite> _mapAssets;
+    map<string,sf::Texture> _map;
 
 public:
   /** \brief Constructeur par défaut
@@ -41,8 +42,22 @@ public:
   /** \brief Charge un asset dans la map d'assets;
    * \param chaine, clé d'une sprite
    * \param chaine, chemin relatif de l'emplacement de l'asset
+   * \param réel, échelle de l'image
+   * \param entier, rotation en degrés de l'image
    */
-  void	loadAsset(const std::string & key, const std::string & filename);
+  void	loadAsset(const std::string & key, const std::string & filename, float scale = 1, int rotation = 0);
+
+  /** \brief Charge un asset dans la map d'assets, en permettant de recadrer l'image;
+   * \param chaine, clé d'une sprite
+   * \param chaine, chemin relatif de l'emplacement de l'asset
+   * \param réel, échelle de l'image
+   * \param entier, rotation en degrés de l'image
+   * \param entier, (pixels) espace à gauche à partir du bord gauche de l'image pour définir le cadre visible de l'asset
+   * \param entier, (pixels) espace en haut à partir du bord haut de l'image pour définir le cadre visible de l'asset
+   * \param entier, (pixels) largeur de l'image pour définir le cadre visible de l'asset
+   * \param entier, (pixels) hauteur de l'image pour définir le cadre visible de l'asset
+   */
+  void	loadAsset(const std::string & key, const std::string & filename, float scale, int rotation, int RectLeft, int RectTop, int RectWidth, int RectHeight);
 
   /** \brief Dessine l'objet dans la fenêtre
    * \param chaine, clé d'une sprite
@@ -55,7 +70,20 @@ public:
    */
   void  display();
 
+  /** \brief Ferme la fenêtre
+   */
+  void  close();
+
+  /** \brief Accesseur de la fenêtre
+   *
+   */
   sf::RenderWindow& getWindow();
+
+  /** \brief Défini la position de la fenêtre
+   * \param coordonée x de la fenêtre sur le bureau
+   * \param coordonée y de la fenêtre sur le bureau
+   */
+  void setPosition(int x, int y);
 };
 
 #endif
