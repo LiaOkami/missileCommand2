@@ -23,10 +23,6 @@ SFMLHandler::~SFMLHandler()
 }
 
 /* Méthodes */
-void SFMLHandler::clearWindow()
-{
-    _window.clear();
-}
 
 void SFMLHandler::loadAsset(const std::string & key, const std::string & filename, float scale, int rotation)
 {
@@ -70,6 +66,11 @@ void SFMLHandler::loadAsset(const std::string & key, const std::string & filenam
     _mapAssets[key] = spriteTemp;
 }
 
+void SFMLHandler::clearWindow()
+{
+    _window.clear();
+}
+
 void SFMLHandler::draw(const std::string & key, Position pos)
 {
     _mapAssets[key].setPosition(pos.x, pos.y);
@@ -92,6 +93,7 @@ void SFMLHandler::close()
     _window.close();
 }
 
+
 /* Accesseurs */
 
 sf::RenderWindow& SFMLHandler::getWindow()
@@ -102,4 +104,9 @@ sf::RenderWindow& SFMLHandler::getWindow()
 void SFMLHandler::setPosition(int x, int y)
 {
     _window.setPosition(sf::Vector2i(x,y));
+}
+
+sf::Vector2u SFMLHandler::getSize()const
+{
+    return _window.getSize();
 }

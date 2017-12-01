@@ -35,10 +35,6 @@ public:
    */
   ~SFMLHandler();
 
-  /** \brief Efface les objets affichés dans la fenêtre
-   */
-  void	clearWindow();
-
   /** \brief Charge un asset dans la map d'assets;
    * \param chaine, clé d'une sprite
    * \param chaine, chemin relatif de l'emplacement de l'asset
@@ -58,6 +54,10 @@ public:
    * \param entier, (pixels) hauteur de l'image pour définir le cadre visible de l'asset
    */
   void	loadAsset(const std::string & key, const std::string & filename, float scale, int rotation, int RectLeft, int RectTop, int RectWidth, int RectHeight);
+
+  /** \brief Efface les objets affichés dans la fenêtre
+   */
+  void	clearWindow();
 
   /** \brief Dessine l'objet dans la fenêtre
    * \param chaine, clé d'une sprite
@@ -95,7 +95,7 @@ public:
   /** \brief Retourne la taile de la fenêtre
    * \return sf::Vector2u
    */
-  sf::Vector2u getSize();
+  sf::Vector2u getSize()const;
 };
 
 #endif
