@@ -40,14 +40,13 @@ void SFMLHandler::loadAsset(const std::string & key, const std::string & filenam
         cout << filename << " chargé, nb de sprite :" << _mapAssets.size() << endl;
     }
 
+    _map[key] = textureTemp;
     sf::Sprite spriteTemp;
-    spriteTemp.setTexture(textureTemp);
+    spriteTemp.setTexture(_map[key]);
     spriteTemp.scale(scale,scale);
     spriteTemp.setRotation(rotation);
 
-    _map[key] = textureTemp;
     _mapAssets[key] = spriteTemp;
-
 }
 
 void SFMLHandler::loadAsset(const std::string & key, const std::string & filename, float scale, int rotation, int RectLeft, int RectTop, int RectWidth, int RectHeight)
@@ -62,19 +61,17 @@ void SFMLHandler::loadAsset(const std::string & key, const std::string & filenam
         cout << filename << " chargé, nb de sprite :" << _mapAssets.size() << endl;
     }
 
+    _map[key] = textureTemp;
     sf::Sprite spriteTemp;
-    spriteTemp.setTexture(textureTemp);
+    spriteTemp.setTexture(_map[key]);
     spriteTemp.scale(scale,scale);
     spriteTemp.setRotation(rotation);
 
-    _map[key] = textureTemp;
     _mapAssets[key] = spriteTemp;
-    cout << &(_map[key]) << "\t" << &(_mapAssets[key]) << endl;
 }
 
 void SFMLHandler::draw(const std::string & key, Position pos)
 {
-    cout << &(_map[key]) << "\t" << &(_mapAssets[key]) << endl;
     _mapAssets[key].setPosition(pos.x, pos.y);
     _window.draw(_mapAssets[key]);
 }

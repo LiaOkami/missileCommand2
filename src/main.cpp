@@ -142,7 +142,7 @@ int     main()
 	window.clearWindow();
 	window.getWindow().draw(pointeurSouris);
 
-	//window.draw("TARGET",cursorTarget); // Tests appels SFMLHandler.draw
+	window.draw("TARGET",cursorTarget); // Tests appels SFMLHandler.draw
 	window.draw("MISSILE",p);
 
 	tabMSize = tabMissiles.size();
