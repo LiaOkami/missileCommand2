@@ -37,7 +37,7 @@ void SFMLHandler::loadAsset(const std::string & key, const std::string & filenam
     }
     else
     {
-        cout << filename << " chargé, nb de sprite :" << _mapAssets.size() << endl;
+        cout << filename << " chargé" << endl;
     }
 
     _map[key] = textureTemp;
@@ -58,7 +58,7 @@ void SFMLHandler::loadAsset(const std::string & key, const std::string & filenam
     }
     else
     {
-        cout << filename << " chargé, nb de sprite :" << _mapAssets.size() << endl;
+        cout << filename << " chargé" << endl;
     }
 
     _map[key] = textureTemp;
@@ -76,6 +76,12 @@ void SFMLHandler::draw(const std::string & key, Position pos)
     _window.draw(_mapAssets[key]);
 }
 
+void SFMLHandler::draw(const std::string & key, float x, float y)
+{
+    _mapAssets[key].setPosition(x, y);
+    _window.draw(_mapAssets[key]);
+}
+
 void SFMLHandler::display()
 {
     _window.display();
@@ -85,6 +91,8 @@ void SFMLHandler::close()
 {
     _window.close();
 }
+
+/* Accesseurs */
 
 sf::RenderWindow& SFMLHandler::getWindow()
 {

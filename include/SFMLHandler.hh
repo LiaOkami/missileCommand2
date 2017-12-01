@@ -65,6 +65,13 @@ public:
    */
   void	draw(const std::string & key, Position pos);
 
+  /** \brief Dessine l'objet dans la fenêtre [Surcharge]
+   * \param chaine, clé d'une sprite
+   * \param reel, coordonée x
+   * \param reel, coordonée y
+   */
+  void	draw(const std::string & key, float x, float y); // temporaire, pour les tests
+
   /** \brief Affiche l'ensemble des objet dessinés
    *
    */
@@ -75,7 +82,7 @@ public:
   void  close();
 
   /** \brief Accesseur de la fenêtre
-   *
+   * \return sf::RenderWindow
    */
   sf::RenderWindow& getWindow();
 
@@ -84,6 +91,11 @@ public:
    * \param coordonée y de la fenêtre sur le bureau
    */
   void setPosition(int x, int y);
+
+  /** \brief Retourne la taile de la fenêtre
+   * \return sf::Vector2u
+   */
+  sf::Vector2u getSize();
 };
 
 #endif
