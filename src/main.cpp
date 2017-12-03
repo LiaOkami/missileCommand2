@@ -15,8 +15,7 @@ int     main()
 
     MissileCommand        game;
     sf::Event             event;
-    SFMLHandler           window(400,400);
-    window.setPosition(600,200);
+    SFMLHandler           window(800,600);
 
     // Pointeur de la souris
     Position cursorPosition;
@@ -38,6 +37,7 @@ int     main()
 
     window.loadAsset("MISSILE","assets/Missile.png",0.5, 90, 0, 50, 253, 78);
     window.loadAsset("TARGET", "assets/cible.png");
+    window.loadAsset("BACKGROUND", "assets/MissileCommand_Background.jpg");
 
 
 
@@ -138,6 +138,7 @@ int     main()
         /* Instructions d'affichage */
         window.clearWindow();
 
+        window.draw("BACKGROUND",0,0);
         window.draw("TARGET",cursorPosition);
         for (int cpt = 0; cpt < tabMissiles.size(); cpt++)
         {

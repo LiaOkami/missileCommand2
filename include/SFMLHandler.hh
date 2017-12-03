@@ -6,6 +6,7 @@
 # define _SFMLHANDLER_HH_
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 # include "Position.hh"
 
 #include <map>

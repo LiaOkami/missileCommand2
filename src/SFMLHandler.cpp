@@ -13,7 +13,9 @@ SFMLHandler::SFMLHandler(int width, int height, string title) :
     _window(sf::VideoMode(width, height), title), _mapAssets(), _map()
 {
     cout << "Création de la fenêtre" << endl;
-    _window.setMouseCursorVisible(false);
+    _window.setMouseCursorVisible(false); // rends invisible le curseur système
+    sf::Vector2i windowPosition(sf::VideoMode::getDesktopMode().width /2 -400, sf::VideoMode::getDesktopMode().height /2 -300);
+    _window.setPosition(windowPosition);
 }
 
 /* Destructeur */
