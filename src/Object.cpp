@@ -2,11 +2,10 @@
 
 using namespace std;
 
-Object::Object(float x, float y, const std::string &key)
+Object::Object(const Position &pos, const string &key)
 {
     _key = key;
-    _pos.x = x;
-    _pos.y = y;
+    _pos = pos;
 }
 
 void Object::draw(SFMLHandler& handler) const
