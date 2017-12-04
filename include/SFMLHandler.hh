@@ -20,7 +20,7 @@ class SFMLHandler
 private:
     sf::RenderWindow _window;
     map<string,sf::Sprite> _mapAssets;
-    map<string,sf::Texture> _map;
+    map<string,sf::Texture> _mapTextures;
 
 public:
   /** \brief Constructeur par défaut

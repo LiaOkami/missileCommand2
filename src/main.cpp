@@ -36,7 +36,7 @@ int     main()
     }
 
     window.loadAsset("MISSILE","assets/Missile.png",0.5, 90, 0, 50, 253, 78);
-    window.loadAsset("TARGET", "assets/cible.png");
+    window.loadAsset("TARGET", "assets/TargetCursor.png");
     window.loadAsset("BACKGROUND", "assets/MissileCommand_Background.jpg");
 
 
@@ -120,8 +120,7 @@ int     main()
 
 
         /** \brief supprime les missiles en dehors de la fenêtre */
-        tabMSize = tabMissiles.size();
-        for(int cpt1 = 0; cpt1 < tabMSize; cpt1++)
+        for(int cpt1 = 0; cpt1 < tabMissiles.size(); cpt1++)
         {
             if(tabMissiles[cpt1].getPosition().y > window.getSize().y-50)
             {
@@ -137,14 +136,16 @@ int     main()
 
         /* Instructions d'affichage */
         window.clearWindow();
-
         window.draw("BACKGROUND",0,0);
-        window.draw("TARGET",cursorPosition);
+
+        //Instruction d'affichage à placer ici pour tester. Les objets dessinés en premier seront à l'arrière-plan et ceux dessinés en dernier seront au premier plan
         for (int cpt = 0; cpt < tabMissiles.size(); cpt++)
         {
             window.draw("MISSILE", tabMissiles[cpt].getPosition().x, tabMissiles[cpt].getPosition().y);
         }
 
+
+        window.draw("TARGET",cursorPosition);
         window.display();
 
     }

@@ -10,12 +10,13 @@ using namespace std;
 
 /* Constructeur */
 SFMLHandler::SFMLHandler(int width, int height, string title) :
-    _window(sf::VideoMode(width, height), title), _mapAssets(), _map()
+    _window(sf::VideoMode(width, height), title), _mapAssets(), _mapTextures()
 {
     cout << "Création de la fenêtre" << endl;
-    _window.setMouseCursorVisible(false); // rends invisible le curseur système
-    sf::Vector2i windowPosition(sf::VideoMode::getDesktopMode().width /2 -400, sf::VideoMode::getDesktopMode().height /2 -300);
-    _window.setPosition(windowPosition);
+    // rends invisible le curseur système
+    _window.setMouseCursorVisible(false);
+    //centre la fenêtre sur le bureau
+    _window.setPosition(sf::Vector2i(sf::VideoMode::getDesktopMode().width /2 -(width/2), sf::VideoMode::getDesktopMode().height /2 -(height/2)));
 }
 
 /* Destructeur */
@@ -23,6 +24,7 @@ SFMLHandler::~SFMLHandler()
 {
 
 }
+
 
 /* Méthodes */
 
@@ -38,9 +40,9 @@ void SFMLHandler::loadAsset(const std::string & key, const std::string & filenam
         cout << filename << " chargé" << endl;
     }
 
-    _map[key] = textureTemp;
+    _mapTextures[key] = textureTemp;
     sf::Sprite spriteTemp;
-    spriteTemp.setTexture(_map[key]);
+    spriteTemp.setTexture(_mapTextures[key]);
     spriteTemp.scale(scale,scale);
     spriteTemp.setRotation(rotation);
 
@@ -52,16 +54,16 @@ void SFMLHandler::loadAsset(const std::string & key, const std::string & filenam
     sf::Texture textureTemp;
     if(!textureTemp.loadFromFile(filename, sf::IntRect(RectLeft, RectTop, RectWidth, RectHeight))) //[1] Chemin de l'image, [2] Cadre de l'image
     {
-	cout << "Erreur chargement texture" << endl;
+        cout << "Erreur chargement texture" << endl;
     }
     else
     {
         cout << filename << " chargé" << endl;
     }
 
-    _map[key] = textureTemp;
+    _mapTextures[key] = textureTemp;
     sf::Sprite spriteTemp;
-    spriteTemp.setTexture(_map[key]);
+    spriteTemp.setTexture(_mapTextures[key]);
     spriteTemp.scale(scale,scale);
     spriteTemp.setRotation(rotation);
 
