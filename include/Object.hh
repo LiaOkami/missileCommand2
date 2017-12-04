@@ -34,6 +34,7 @@ public:
     Object(float x, float y, const std::string &key);
 
     void	draw(SFMLHandler& handler) const;
+  virtual void	update(); //
 };
 
 #endif
