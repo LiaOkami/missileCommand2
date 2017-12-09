@@ -39,10 +39,10 @@ int     main()
         cout << "Erreur chargement texture (missile_01.png)" << endl;
     }
 
-    window.loadAsset("MISSILE_ALLY","assets/Missile-Ally.png");
-    window.loadAsset("MISSILE_FOE","assets/Missile.png",0.5, 90, 0, 50, 253, 78);
+    window.loadAsset("MISSILE_ALLY","assets/Missile_Ally.png",0.5, 0);
+    window.loadAsset("MISSILE_FOE","assets/Missile_Foe.png",0.5, 0);
     window.loadAsset("CANON","assets/Canon.png");
-    window.loadAsset("TARGET", "assets/TargetCursorV2.png");
+    window.loadAsset("TARGET", "assets/TargetCursor.png");
     window.loadAsset("BACKGROUND", "assets/MissileCommand_Background.jpg");
 
 
@@ -145,12 +145,12 @@ int     main()
         window.draw("BACKGROUND",0,0);
 
         //Instruction d'affichage à placer ici pour tester. Les objets dessinés en premier seront à l'arrière-plan et ceux dessinés en dernier seront au premier plan
-        window.draw("CANON", canonPosition);
         for (int cpt = 0; cpt < tabMissiles.size(); cpt++)
         {
             window.draw("MISSILE_FOE", tabMissiles[cpt].getPosition().x, tabMissiles[cpt].getPosition().y);
         }
-        //window.draw("MISSILE_ALLY", allyMissilePosition);
+        window.draw("CANON", canonPosition);
+        window.draw("MISSILE_ALLY", allyMissilePosition);
 
 
         window.draw("TARGET",cursorPosition);
