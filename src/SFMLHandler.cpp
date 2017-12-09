@@ -97,6 +97,20 @@ void SFMLHandler::close()
     _window.close();
 }
 
+bool SFMLHandler::cursorHover(const string & key, Position pos)
+{
+    _mapAssets[key].setPosition(pos.x, pos.y);
+    sf::Vector2f mousePosition(sf::Mouse::getPosition(_window));
+    return _mapAssets[key].getGlobalBounds().contains(mousePosition);
+}
+
+bool SFMLHandler::objectIntersects(const string & key1, Position pos1, const string & key2, Position pos2)
+{
+    _mapAssets[key1].setPosition(pos1.x, pos1.y);
+    _mapAssets[key2].setPosition(pos2.x, pos2.y);
+    return _mapAssets[key1].getGlobalBounds().intersects(_mapAssets[key2].getGlobalBounds());
+}
+
 
 /* Accesseurs */
 

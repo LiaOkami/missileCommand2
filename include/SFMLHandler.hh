@@ -67,7 +67,7 @@ public:
   void	draw(const std::string & key, Position pos);
 
   /** \brief Dessine l'objet dans la fenêtre [Surcharge]
-   * \param chaine, clé d'une sprite
+   * \param chaine, clé d'un asset
    * \param reel, coordonée x
    * \param reel, coordonée y
    */
@@ -81,6 +81,25 @@ public:
   /** \brief Ferme la fenêtre
    */
   void  close();
+
+  /** \brief Vérifie si le curseur est dans les bordures d'un asset
+   * \param chaine, clé d'une sprite
+   * \param position de l'objet à vérifier
+   * \return bool
+   */
+  bool cursorHover(const string & key, Position pos);
+
+  /** \brief Vérifie si deux objets se recouvrent
+   * \param chaine, clé du premier sprite
+   * \param position du premier objet à vérifier
+   * \param chaine, clé du second sprite
+   * \param position du second objet à vérifier
+   * \return bool
+   */
+  bool objectIntersects(const string & key1, Position pos1, const string & key2, Position pos2);
+
+
+  /* ACCESSEURS */
 
   /** \brief Accesseur de la fenêtre
    * \return sf::RenderWindow
