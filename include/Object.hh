@@ -22,15 +22,15 @@ private:
     string _key;
 
 public:
- /*    /** \brief Constructeur par défaut
+     /** \brief Constructeur par défaut
      *
-     *  \param float x abcisse de l'objet
-     *  \param float y ordonnée de l'objet
-     *  \param const string key
+     *  \param float x abcisse d'Object
+     *  \param float y ordonnée de d'Object
+     *  \param chaine, clé d'une sprite d'un Object
      *
      *  Construction de l'objet, ayant pour attributs une position, abcisse et ordonnée, et une key
      */
-    //Object(const Position &, const string &);*/
+    Object(const Position &, const string &);
 
 
     /** \brief affichage de l'objet
@@ -43,17 +43,12 @@ public:
 
     void setPos(const Position &pos);/**< \brief _Position setter */
 
+    Position getPos(const Position &pos);/**< \brief _Position getter */
 
     void setKey(const string &key);/**< \brief _Key setter */
 
 
-    /** \brief fonction update
-    *
-    *  \param update pour l'affichage
-    *
-    *  Fonction de mise à jour de l'affichage d'Object, dépend de l'update des classes héritières (virtual)
-    */
-    virtual void update(); //renvoie à l'update de niveau inferieur si update different
+
 };
 
 #endif

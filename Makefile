@@ -27,7 +27,8 @@ DBGFLAGS	= -g3
 SRC		= src/main.cpp \
 		  src/MissileCommand.cpp \
 		  src/SFMLHandler.cpp \
-		  src/Object.cpp
+		  src/Object.cpp \
+		  src/Missile.cpp
 
 OBJ		= $(SRC:.cpp=.o)
 

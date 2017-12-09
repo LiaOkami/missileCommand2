@@ -27,10 +27,12 @@
 			</Target>
 		</Build>
 		<Unit filename="Makefile" />
+		<Unit filename="include/Missile.hh" />
 		<Unit filename="include/MissileCommand.hh" />
 		<Unit filename="include/Object.hh" />
 		<Unit filename="include/Position.hh" />
 		<Unit filename="include/SFMLHandler.hh" />
+		<Unit filename="src/Missile.cpp" />
 		<Unit filename="src/MissileCommand.cpp" />
 		<Unit filename="src/Object.cpp" />
 		<Unit filename="src/SFMLHandler.cpp" />

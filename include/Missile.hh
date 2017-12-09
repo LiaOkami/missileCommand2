@@ -1,18 +1,20 @@
 #ifndef _MISSILE_HH_
-#define _MISSILE_HH_
-#include "Object.hh"
+# define _MISSILE_HH_
+# include "Object.hh"
 
 class Missile : public Object
 {
 private:
-    Missile(float z, float a, float x1, float y1);
 
+float _speed;
+Position _posEnd;
 
 public:
-    Missile()
-    {
 
-    }
+    Missile(float speed, Position posBegin, Position posEnd, const string& key);
+
+
+    void move(int ms);
 };
 
 #endif // _MISSILE_HH_
