@@ -17,9 +17,6 @@ int     main()
     sf::Event             event;
     SFMLHandler           window(800,600);
 
-    // Pointeur de la souris
-    Position cursorPosition;
-
     // Horloges
     sf::Clock chrono, apparition;
     sf::Time dureeMax = sf::milliseconds(100), dureeApparition = sf::seconds(1);
@@ -28,6 +25,13 @@ int     main()
     vector <sf::Sprite> tabMissiles(0);
     int tabMSize = tabMissiles.size();
 
+    // Pointeur de la souris
+    Position cursorPosition;
+
+    //Positions de tests
+    Position canonPosition, allyMissilePosition;
+    canonPosition.x = 50; canonPosition.y = 50; allyMissilePosition.x = 100; allyMissilePosition.y = 50;
+
     /* Chargement des Assets */
     sf::Texture missile;
     if(!missile.loadFromFile("assets/Missile.png", sf::IntRect(0,50,253,78))) //[1] Chemin de l'image, [2] Cadre de l'image
@@ -35,8 +39,10 @@ int     main()
         cout << "Erreur chargement texture (missile_01.png)" << endl;
     }
 
-    window.loadAsset("MISSILE","assets/Missile.png",0.5, 90, 0, 50, 253, 78);
-    window.loadAsset("TARGET", "assets/TargetCursor.png");
+    window.loadAsset("MISSILE_ALLY","assets/Missile-Ally.png");
+    window.loadAsset("MISSILE_FOE","assets/Missile.png",0.5, 90, 0, 50, 253, 78);
+    window.loadAsset("CANON","assets/Canon.png");
+    window.loadAsset("TARGET", "assets/TargetCursorV2.png");
     window.loadAsset("BACKGROUND", "assets/MissileCommand_Background.jpg");
 
 
@@ -139,10 +145,12 @@ int     main()
         window.draw("BACKGROUND",0,0);
 
         //Instruction d'affichage à placer ici pour tester. Les objets dessinés en premier seront à l'arrière-plan et ceux dessinés en dernier seront au premier plan
+        window.draw("CANON", canonPosition);
         for (int cpt = 0; cpt < tabMissiles.size(); cpt++)
         {
-            window.draw("MISSILE", tabMissiles[cpt].getPosition().x, tabMissiles[cpt].getPosition().y);
+            window.draw("MISSILE_FOE", tabMissiles[cpt].getPosition().x, tabMissiles[cpt].getPosition().y);
         }
+        //window.draw("MISSILE_ALLY", allyMissilePosition);
 
 
         window.draw("TARGET",cursorPosition);
