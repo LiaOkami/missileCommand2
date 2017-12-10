@@ -15,6 +15,8 @@ public:
 
 
     void move(int ms);
+
+  bool	isEnded() const;
 };
 
 #endif // _MISSILE_HH_
