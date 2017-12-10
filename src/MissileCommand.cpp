@@ -54,13 +54,12 @@ void	MissileCommand::_pollEvents()
       /** \brief Si l'utilisateur clique sur le missile, il est supprimé
 	  UPDATE: Le clic sur l'écran doit envoyer un missile */
 
-      if(event.type == sf::Event::MouseButtonPressed)
+      if(event.type == sf::Event::MouseButtonPressed &&
+	 event.mouseButton.button == sf::Mouse::Left)
 	{
-	  if (event.mouseButton.button == sf::Mouse::Left && _tabMissiles.size()>0)
-	    {
-	      Missile m1(12, _canonPosition, _window.getMouse(), "MISSILE_ALLY");
-	      _tabMissAlly.push_back(m1);
-	    }
+	  Missile m1(12, _canonPosition, _window.getMouse(), "MISSILE_ALLY");
+	  _tabMissAlly.push_back(m1);
+	  cout << "Création d'un missile allié" << endl;
 	}
     }
 }
@@ -74,6 +73,8 @@ void	MissileCommand::_update()
 	{
 	  _tabMissiles[cpt].move(0,7);
 	}
+      for (Missile & missile:_tabMissAlly)
+	missile.move(1);
       _chrono.restart();
     }
 
@@ -125,6 +126,8 @@ void	MissileCommand::_draw()
     {
       _window.draw("MISSILE_FOE", _tabMissiles[cpt].getPosition().x, _tabMissiles[cpt].getPosition().y);
     }
+  for (const Missile & missile:_tabMissAlly)
+    _window.draw("MISSILE_ALLY", missile.getPos());
   _window.draw("CANON", _canonPosition);
   _window.draw("TARGET", _window.getMouse());
   _window.display();
