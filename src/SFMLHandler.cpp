@@ -106,7 +106,7 @@ void SFMLHandler::draw(const std::string & key, Position pos)
 void SFMLHandler::draw(const std::string & key, Position pos, double rot)
 {
     _mapAssets[key].setPosition(pos.x, pos.y);
-    _mapAssets[key].setRotation((float) rot);
+    _mapAssets[key].setRotation(180 * rot / M_PI - 90);
     _window.draw(_mapAssets[key]);
 }
 
