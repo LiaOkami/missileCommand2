@@ -10,9 +10,8 @@ using namespace std;
 
 
 MissileCommand::MissileCommand() :
-  _window(800, 600)
+  _window(800, 600), _canonPosition(368.0, 467.0)
 {
-    _canonPosition.x = 368; _canonPosition.y = 467;
     _dureeMax = sf::milliseconds(100);
     _dureeApparition = sf::seconds(1);
 
@@ -28,11 +27,8 @@ MissileCommand::MissileCommand() :
 void	MissileCommand::launch()
 {
     /* Boucle Principale */
-
     while (_window.getWindow().isOpen())
     {
-	/* Boucle d'évènements */
-
       _pollEvents();
       _update();
       _draw();
@@ -43,6 +39,7 @@ void	MissileCommand::_pollEvents()
 {
   sf::Event	event;
 
+  /* Boucle d'évènements */
   while (_window.getWindow().pollEvent(event))
     {
       if (event.type == sf::Event::Closed)
@@ -76,24 +73,17 @@ void	MissileCommand::_update()
       _chrono.restart();
     }
 
-
   /** \brief ajoute un missile au tableau de missiles lorsque la duée d'apparition est écoulée */
   if (_apparition.getElapsedTime() > _dureeApparition)
     {
-  //Créer un missile ennemi
-  //_tabMissiles.push_back(sprite_missile);
-      Position	pos1;
-      Position	pos2;
-      pos1.x = rand() % (_window.getSize().x - 78 / 2) + 78 / 2;
-      pos1.y = 0;
-      pos2.x = rand() % (_window.getSize().x - 78 / 2) + 78 / 2;
-      pos2.y = 800;
-      Missile	m1(7, pos1, pos2, "MISSILE_FOE");
+      Position	posBeg(rand() % (_window.getSize().x - 78 / 2) + 78 / 2, 0);
+      Position	posEnd(rand() % (_window.getSize().x - 78 / 2) + 78 / 2, 800);
+      Missile	m1(7, posBeg, posEnd, "MISSILE_FOE");
+
       _tabMissFoe.push_back(m1);
       _apparition.restart();
       cout << "Création d'un missile" << endl;
     }
-
 
   /** \brief supprime les missiles en dehors de la fenêtre */
   for(int cpt1 = 0; cpt1 < _tabMissFoe.size(); cpt1++)

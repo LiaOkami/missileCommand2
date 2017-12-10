@@ -12,8 +12,10 @@
  */
 struct Position
 {
-  float	x;
-  float	y;
+  double	x;
+  double	y;
+
+  Position(double xx = 0, double yy = 0) { x=xx; y=yy;}
 };
 
 /** \brief Structure représentant une Position en terme d'entiers positifs

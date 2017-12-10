@@ -15,9 +15,9 @@ class MissileCommand
 {
 private:
   SFMLHandler	_window;
+  Position		_canonPosition;
   std::vector<Missile>	_tabMissFoe;
   std::vector<Missile>	_tabMissAlly;
-  Position		_canonPosition;
   sf::Clock		_chrono;
   sf::Clock		_apparition;
   sf::Time		_dureeMax;
