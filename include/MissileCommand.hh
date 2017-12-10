@@ -18,7 +18,6 @@ private:
   vector <sf::Sprite>	_tabMissiles;
   std::vector<Missile>	_tabMissAlly;
   Position		_canonPosition;
-  sf::Event		_event;
   sf::Clock		_chrono;
   sf::Clock		_apparition;
   sf::Time		_dureeMax;
@@ -37,6 +36,7 @@ public:
   void	launch();
 
 private:
+  void	_pollEvents();
   void	_update();
   void	_draw();
 };

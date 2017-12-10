@@ -33,29 +33,35 @@ void	MissileCommand::launch()
     {
 	/* Boucle d'évènements */
 
-	while (_window.getWindow().pollEvent(_event))
+      _pollEvents();
+      _update();
+      _draw();
+    }
+}
+
+void	MissileCommand::_pollEvents()
+{
+  sf::Event	event;
+
+  while (_window.getWindow().pollEvent(event))
+    {
+      if (event.type == sf::Event::Closed)
+	_window.close();
+      if (event.type == sf::Event::KeyPressed)
+	_window.close();
+
+
+      /** \brief Si l'utilisateur clique sur le missile, il est supprimé
+	  UPDATE: Le clic sur l'écran doit envoyer un missile */
+
+      if(event.type == sf::Event::MouseButtonPressed)
 	{
-	    if (_event.type == sf::Event::Closed)
-		_window.close();
-	    if (_event.type == sf::Event::KeyPressed)
-		_window.close();
-
-
-	    /** \brief Si l'utilisateur clique sur le missile, il est supprimé
-	    UPDATE: Le clic sur l'écran doit envoyer un missile */
-
-	    if(_event.type == sf::Event::MouseButtonPressed)
+	  if (event.mouseButton.button == sf::Mouse::Left && _tabMissiles.size()>0)
 	    {
-		if (_event.mouseButton.button == sf::Mouse::Left && _tabMissiles.size()>0)
-		{
-		    Missile m1(12, _canonPosition, _window.getMouse(), "MISSILE_ALLY");
-		    _tabMissAlly.push_back(m1);
-		}
+	      Missile m1(12, _canonPosition, _window.getMouse(), "MISSILE_ALLY");
+	      _tabMissAlly.push_back(m1);
 	    }
 	}
-
-	_update();
-	_draw();
     }
 }
 
