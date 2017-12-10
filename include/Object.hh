@@ -43,7 +43,7 @@ public:
 
     void setPos(const Position &pos);/**< \brief _Position setter */
 
-    Position getPos(const Position &pos);/**< \brief _Position getter */
+    const Position& getPos() const;/**< \brief _Position getter */
 
     void setKey(const string &key);/**< \brief _Key setter */
 

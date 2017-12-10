@@ -18,7 +18,7 @@ void Object::setKey(const string &key)
     _key = key;
 }
 
-Position Object::getPos(const Position &pos)
+const Position& Object::getPos() const
 {
     return _pos;
 }
@@ -27,4 +27,3 @@ void Object::draw(SFMLHandler& handler) const
 {
     handler.draw(_key, _pos);
 }
-

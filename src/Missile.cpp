@@ -1,7 +1,6 @@
 #include "Object.hh"
 #include "Missile.hh"
 #include <cmath>
-#include <ctgmath>
 
 using namespace std;
 
@@ -21,10 +20,5 @@ void Missile::move(int ms)
 
     pos.x += _speed * ms * cos(angle);
     pos.y += _speed * ms * sin(angle);
-    Missile.setPos(pos);
+    this->setPos(pos);
 }
-
-
-
-
-
