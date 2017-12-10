@@ -16,7 +16,20 @@ private:
   float	_ray;
 
 public:
+
+    /** \brief méthode de génération d'une explosion
+     *
+     *  \param const Position &pos : prends en paramètres une Position
+     *
+     *  Méthode gérant toutes les explosions
+     */
   Explosion(const Position &pos);
 
+    /** \brief fonction d'update de l'explosion en fonction du temps en ms
+     *
+     *  \param float time: référentiel de temps pour gérer l'affichage de l'explosion
+     *
+     *  Fonction calculant le déplacement du missile à chaque frame
+     */
   void	update(float time);
 };
