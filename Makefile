@@ -5,14 +5,14 @@
 ## Login   <pierrick.garcia@u-psud.fr>
 ##
 ## Started on  Tue Oct 10 13:52:27 2017 Pierrick Garcia
-## Last update Sun Dec 10 11:46:44 2017 Pierrick Garcia
+## Last update Sun Dec 10 15:57:46 2017 Pierrick Garcia
 ##
 
 COMP		= g++
 
 EDITOR		= emacs -nw
 
-CFLAGS		+= -W -Wall -Wextra -O3
+CFLAGS		+= -W -Wall -Wextra -O3 -std=c++11
 
 INCLUDES	+= -I./include
 
