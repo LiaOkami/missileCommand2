@@ -64,9 +64,9 @@ void SFMLHandler::loadAsset(const std::string & key, const std::string & filenam
     _mapTextures[key] = textureTemp;
     sf::Sprite spriteTemp;
     spriteTemp.setTexture(_mapTextures[key]);
+    spriteTemp.setOrigin(originX, originY);
     spriteTemp.scale(scale,scale);
     spriteTemp.setRotation(rotation);
-    spriteTemp.setOrigin(originX, originY);
 
     _mapAssets[key] = spriteTemp;
 }

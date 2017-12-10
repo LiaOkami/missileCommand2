@@ -16,8 +16,8 @@ MissileCommand::MissileCommand() :
     _dureeApparition = sf::seconds(1);
 
     /* Chargement des Assets */
-    _window.loadAsset("MISSILE_ALLY","assets/Missile_Ally.png",0.5, 0);
-    _window.loadAsset("MISSILE_FOE","assets/Missile_Foe.png",0.5, 0);
+    _window.loadAsset("MISSILE_ALLY","assets/Missile_Ally.png",0.5, 0, 65/2, 250/2);
+    _window.loadAsset("MISSILE_FOE","assets/Missile_Foe.png",0.5, 0, 65/2, 250/2);
     _window.loadAsset("CANON","assets/Canon.png");
     _window.loadAsset("TARGET", "assets/TargetCursor.png");
     _window.loadAsset("BACKGROUND", "assets/MissileCommand_Background.jpg");
