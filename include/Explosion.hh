@@ -15,6 +15,7 @@ private:
   static const float	_SPEED = 30;
   float	_ray;
 
+public:
   Explosion(const Position &pos);
 
   void	update(float time);
