@@ -31,3 +31,8 @@ bool	Missile::isEnded() const
 {
   return (this->getPos().y == _posEnd.y);
 }
+
+double	Missile::getAngle() const
+{
+  return _angle;
+}
