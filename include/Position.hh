@@ -16,4 +16,13 @@ struct Position
   float	y;
 };
 
+/** \brief Structure représentant une Position en terme d'entiers positifs
+ *  \author Pierrick Garcia
+ */
+struct PositionI
+{
+  unsigned int	x;
+  unsigned int	y;
+};
+
 #endif
