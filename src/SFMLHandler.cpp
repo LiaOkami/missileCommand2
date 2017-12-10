@@ -133,3 +133,13 @@ PositionI	SFMLHandler::getSize() const
   pos.y = vect.y;
   return (pos);
 }
+
+Position	SFMLHandler::getMouse() const
+{
+  sf::Vector2f	mouse(sf::Mouse::getPosition(_window));
+  Position	pos;
+
+  pos.x = mouse.x;
+  pos.y = mouse.y;
+  return (pos);
+}

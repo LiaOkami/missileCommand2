@@ -112,9 +112,14 @@ public:
   void setPosition(const PositionI &pos);
 
   /** \brief Retourne la taile de la fenêtre
-   * \return PositionI
+   *  \return PositionI
    */
-  PositionI getSize() const;
+  PositionI	getSize() const;
+
+  /** \brief Retourne la Position de la souris
+   *  \return Position
+   */
+  Position	getMouse() const;
 };
 
 #endif
