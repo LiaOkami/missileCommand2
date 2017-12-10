@@ -33,11 +33,11 @@ void SFMLHandler::loadAsset(const std::string & key, const std::string & filenam
     sf::Texture textureTemp;
     if(!textureTemp.loadFromFile(filename))
     {
-        cout << "Erreur chargement texture" << endl;
+	cout << "Erreur chargement texture" << endl;
     }
     else
     {
-        cout << filename << " chargé" << endl;
+	cout << filename << " chargé" << endl;
     }
 
     _mapTextures[key] = textureTemp;
@@ -54,11 +54,11 @@ void SFMLHandler::loadAsset(const std::string & key, const std::string & filenam
     sf::Texture textureTemp;
     if(!textureTemp.loadFromFile(filename, sf::IntRect(RectLeft, RectTop, RectWidth, RectHeight))) //[1] Chemin de l'image, [2] Cadre de l'image
     {
-        cout << "Erreur chargement texture" << endl;
+	cout << "Erreur chargement texture" << endl;
     }
     else
     {
-        cout << filename << " chargé" << endl;
+	cout << filename << " chargé" << endl;
     }
 
     _mapTextures[key] = textureTemp;
@@ -119,12 +119,17 @@ sf::RenderWindow& SFMLHandler::getWindow()
     return _window;
 }
 
-void SFMLHandler::setPosition(int x, int y)
+void SFMLHandler::setPosition(const PositionI &pos)
 {
-    _window.setPosition(sf::Vector2i(x,y));
+    _window.setPosition(sf::Vector2i(pos.x, pos.y));
 }
 
-sf::Vector2u SFMLHandler::getSize()const
+PositionI	SFMLHandler::getSize() const
 {
-    return _window.getSize();
+  sf::Vector2u	vect = _window.getSize();
+  PositionI	pos;
+
+  pos.x = vect.x;
+  pos.y = vect.y;
+  return (pos);
 }

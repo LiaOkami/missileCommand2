@@ -106,16 +106,15 @@ public:
    */
   sf::RenderWindow& getWindow();
 
-  /** \brief Défini la position de la fenêtre
-   * \param coordonée x de la fenêtre sur le bureau
-   * \param coordonée y de la fenêtre sur le bureau
+  /** \brief Définit la position de la fenêtre
+   * \param pos Coordonnées de la fenêtre sur le bureau
    */
-  void setPosition(int x, int y);
+  void setPosition(const PositionI &pos);
 
   /** \brief Retourne la taile de la fenêtre
-   * \return sf::Vector2u
+   * \return PositionI
    */
-  sf::Vector2u getSize()const;
+  PositionI getSize() const;
 };
 
 #endif
