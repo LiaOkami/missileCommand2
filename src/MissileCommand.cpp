@@ -100,7 +100,23 @@ void	MissileCommand::_update()
 	}
     }
 
-  /** \brief Provoque une explosion quand un missile allié atteint sa position finale */
+  /* TMP Détruit un missile et les missiles ennemis le touchant */
+  unsigned int cpt;
+
+  cpt = 0;
+  while (cpt < _tabMissAlly.size())
+    {
+      if (_tabMissAlly[cpt].isEnded())
+	{
+	  _checkCollision(_tabMissAlly[cpt]);
+	  _tabMissAlly.erase(_tabMissAlly.begin() + cpt);
+	}
+      else
+	cpt += 1;
+    }
+
+
+  /** TODO \brief Provoque une explosion quand un missile allié atteint sa position finale */
   for(int cpt = 0; cpt<_tabMissAlly.size();cpt++)
     {
       if (_tabMissAlly[cpt].isEnded())
@@ -108,6 +124,23 @@ void	MissileCommand::_update()
 	  Explosion e1(_tabMissAlly[cpt].getPos());
 	  //Supprimer du vecteur le missile
 	}
+    }
+}
+
+void		MissileCommand::_checkCollision(const Object &missile)
+{
+  unsigned int	cpt;
+
+  cpt = 0;
+  while (cpt < _tabMissFoe.size())
+    {
+      if (_window.objectIntersects(missile.getKey(), missile.getPos(),
+				   _tabMissFoe[cpt].getKey(), _tabMissFoe[cpt].getPos()))
+	{
+	  _tabMissFoe.erase(_tabMissFoe.begin() + cpt);
+	}
+      else
+	cpt += 1;
     }
 }
 
