@@ -5,21 +5,21 @@
 using namespace std;
 
 Missile::Missile(float speed,  Position posBegin, Position posEnd, const string& key)
-    : Object(posBegin,key)
+  : Object(posBegin, key)
 {
-    _speed = speed;
-    _posEnd = posEnd;
+  Position	pos = this->getPos();
 
+  _speed = speed;
+  _posEnd = posEnd;
+  _angle = atan2(_posEnd.y - pos.y, _posEnd.x - pos.x);
 }
 
-
-void Missile::move(int ms)
+void	Missile::move(int ms)
 {
-    Position pos = getPos();
-    double angle = atan2(_posEnd.y - pos.y, _posEnd.x - pos.x);
+    Position	pos = this->getPos();
 
-    pos.x += _speed * ms * cos(angle);
-    pos.y += _speed * ms * sin(angle);
+    pos.x += _speed * ms * cos(_angle);
+    pos.y += _speed * ms * sin(_angle);
     if (this->getKey() == "MISSILE_ALLY" && pos.y <= _posEnd.y)
       pos = _posEnd;
     else if (this->getKey() == "MISSILE_FOE" && pos.y >= _posEnd.y)
