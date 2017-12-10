@@ -12,175 +12,114 @@ using namespace std;
 MissileCommand::MissileCommand() :
   _window(800, 600)
 {
-
-}
-
-void	MissileCommand::launch()
-{
-    /* Initialisations */
-
-    sf::Event             event;
-
-    // Horloges
-    sf::Clock chrono, apparition;
-    sf::Time dureeMax = sf::milliseconds(100), dureeApparition = sf::seconds(1);
-
-    // Vecteur de Sprites-missiles
-    vector <sf::Sprite> tabMissiles(0);
-    int tabMSize = tabMissiles.size();
-
-    //Vecteur des missiles aliés
-    vector<Missile> tabMissAlly;
-
-    // Pointeur de la souris
-    Position cursorPosition;
-
-    //Positions de tests
-    Position canonPosition, allyMissilePosition;
-    canonPosition.x = 368; canonPosition.y = 467; allyMissilePosition.x = 100; allyMissilePosition.y = 50;
+    _canonPosition.x = 368; _canonPosition.y = 467;
+    _dureeMax = sf::milliseconds(100);
+    _dureeApparition = sf::seconds(1);
 
     /* Chargement des Assets */
-    sf::Texture missile;
-    if(!missile.loadFromFile("assets/Missile.png", sf::IntRect(0,50,253,78))) //[1] Chemin de l'image, [2] Cadre de l'image
-    {
-	cout << "Erreur chargement texture (missile_01.png)" << endl;
-    }
-
     _window.loadAsset("MISSILE_ALLY","assets/Missile_Ally.png",0.5, 0);
     _window.loadAsset("MISSILE_FOE","assets/Missile_Foe.png",0.5, 0);
     _window.loadAsset("CANON","assets/Canon.png");
     _window.loadAsset("TARGET", "assets/TargetCursor.png");
     _window.loadAsset("BACKGROUND", "assets/MissileCommand_Background.jpg");
+}
 
 
-
+void	MissileCommand::launch()
+{
     /* Boucle Principale */
 
     while (_window.getWindow().isOpen())
     {
 	/* Boucle d'évènements */
 
-	while (_window.getWindow().pollEvent(event))
+	while (_window.getWindow().pollEvent(_event))
 	{
-	    if (event.type == sf::Event::Closed)
+	    if (_event.type == sf::Event::Closed)
 		_window.close();
-	    if (event.type == sf::Event::KeyPressed)
+	    if (_event.type == sf::Event::KeyPressed)
 		_window.close();
-
-
-	    /** \brief met à jour la position du pointeur avec la position du curseur de la souris */
-	    sf::Vector2f mousePosition(sf::Mouse::getPosition(_window.getWindow()));
-	    if (event.MouseMoved)
-	    {
-		cursorPosition.x = mousePosition.x;
-		cursorPosition.y = mousePosition.y;
-	    }
 
 
 	    /** \brief Si l'utilisateur clique sur le missile, il est supprimé
 	    UPDATE: Le clic sur l'écran doit envoyer un missile */
 
-	    if(event.type == sf::Event::MouseButtonPressed)
+	    if(_event.type == sf::Event::MouseButtonPressed)
 	    {
-		if (event.mouseButton.button == sf::Mouse::Left && tabMissiles.size()>0)
+		if (_event.mouseButton.button == sf::Mouse::Left && _tabMissiles.size()>0)
 		{
-		    /*tabMSize = tabMissiles.size();
-		    sf::Vector2f positionSouris2(sf::Mouse::getPosition(_window.getWindow()));
-		    for(int cpt1 = 0; cpt1 < tabMSize; cpt1++) // vérification pour chaque missile
-		    {
-			if(tabMissiles[cpt1].getGlobalBounds().contains(positionSouris2)) // Si la souris est sur le sprite, décalage et suppression
-			{
-			    cout << "Missile cliqué. ";
-			    for(int cpt2 = cpt1; cpt2 < tabMSize-1; cpt2++)
-			    {
-				tabMissiles[cpt2] = tabMissiles[cpt2+1];
-			    }
-			    cout << "Missile supprimé." << endl;
-			    tabMissiles.pop_back();
-			}
-		    }*/
-		    Position pFinal=_window.getMouse();
-		    Position pInit;
-		    pInit=canonPosition;
-		    float speed=12;
-		    Missile m1(speed,pInit,pFinal,"MISSILE_ALLY");
-		    m1.draw(_window);
-		    tabMissAlly.push_back(m1);
+		    Missile m1(12, _canonPosition, _window.getMouse(), "MISSILE_ALLY");
+		    _tabMissAlly.push_back(m1);
 		}
 	    }
 	}
 
-	/* Mise à jour des éléments */
-
-	/** \brief fait bouger les missiles*/
-	if ( chrono.getElapsedTime() > dureeMax)
-	{
-	    tabMSize = tabMissiles.size();
-	    for (int cpt = 0; cpt < tabMSize; cpt++)
-	    {
-		tabMissiles[cpt].move(0,7);
-	    }
-	    chrono.restart();
-	}
-
-
-	/** \brief ajoute un missile au tableau de missiles lorsque la duée d'apparition est écoulée */
-	if (apparition.getElapsedTime() > dureeApparition)
-	{
-	    sf::Sprite sprite_missile;
-	    int x = (rand()%(_window.getSize().x-78/2)) +78/2;
-
-	    sprite_missile.setTexture(missile);
-	    sprite_missile.scale(0.5,0.5);
-	    sprite_missile.setRotation(90.0);
-	    sprite_missile.setPosition(x,0);
-	    tabMissiles.push_back(sprite_missile);
-	    apparition.restart();
-	    cout << "Création d'un missile" << endl;
-	}
-
-
-	/** \brief supprime les missiles en dehors de la fenêtre */
-	for(int cpt1 = 0; cpt1 < tabMissiles.size(); cpt1++)
-	{
-	    if(tabMissiles[cpt1].getPosition().y > _window.getSize().y-50)
-	    {
-		cout << "Missile sorti ( " << tabMissiles[cpt1].getPosition().y << " > " << _window.getSize().y-50 << " ). ";
-		for(int cpt2 = cpt1; cpt2 < tabMSize-1; cpt2++)
-		{
-		    tabMissiles[cpt2] = tabMissiles[cpt2+1];
-		}
-		cout << "Missile supprimé." << endl;
-		tabMissiles.pop_back();
-	    }
-	}
-
-	/** \brief Provoque une explosion quand un missile allié atteint sa position finale */
-	for(int cpt = 0; cpt<tabMissAlly.size();cpt++)
-	{
-	  if (tabMissAlly[cpt].isEnded())
-	    {
-		Explosion e1(tabMissAlly[cpt].getPos());
-		//Supprimer du vecteur le missile
-	    }
-	}
-
-
-	/* Instructions d'affichage */
-	_window.clearWindow();
-	_window.draw("BACKGROUND",0,0);
-
-	//Instruction d'affichage à placer ici pour tester. Les objets dessinés en premier seront à l'arrière-plan et ceux dessinés en dernier seront au premier plan
-	for (int cpt = 0; cpt < tabMissiles.size(); cpt++)
-	{
-	    _window.draw("MISSILE_FOE", tabMissiles[cpt].getPosition().x, tabMissiles[cpt].getPosition().y);
-	}
-	_window.draw("CANON", canonPosition);
-	_window.draw("MISSILE_ALLY", allyMissilePosition);
-
-
-	_window.draw("TARGET",cursorPosition);
-	_window.display();
-
+	_update();
+	_draw();
     }
+}
+
+void	MissileCommand::_update()
+{
+  /** \brief fait bouger les missiles*/
+  if (_chrono.getElapsedTime() > _dureeMax)
+    {
+      for (int cpt = 0; cpt < _tabMissiles.size(); cpt++)
+	{
+	  _tabMissiles[cpt].move(0,7);
+	}
+      _chrono.restart();
+    }
+
+
+  /** \brief ajoute un missile au tableau de missiles lorsque la duée d'apparition est écoulée */
+  if (_apparition.getElapsedTime() > _dureeApparition)
+    {
+  //Créer un missile ennemi
+  //_tabMissiles.push_back(sprite_missile);
+      _apparition.restart();
+      cout << "Création d'un missile" << endl;
+    }
+
+
+  /** \brief supprime les missiles en dehors de la fenêtre */
+  for(int cpt1 = 0; cpt1 < _tabMissiles.size(); cpt1++)
+    {
+      if(_tabMissiles[cpt1].getPosition().y > _window.getSize().y-50)
+	{
+	  cout << "Missile sorti ( " << _tabMissiles[cpt1].getPosition().y << " > " << _window.getSize().y-50 << " ). ";
+	  for(int cpt2 = cpt1; cpt2 < _tabMissiles.size() - 1; cpt2++)
+	    {
+	      _tabMissiles[cpt2] = _tabMissiles[cpt2+1];
+	    }
+	  cout << "Missile supprimé." << endl;
+	  _tabMissiles.pop_back();
+	}
+    }
+
+  /** \brief Provoque une explosion quand un missile allié atteint sa position finale */
+  for(int cpt = 0; cpt<_tabMissAlly.size();cpt++)
+    {
+      if (_tabMissAlly[cpt].isEnded())
+	{
+	  Explosion e1(_tabMissAlly[cpt].getPos());
+	  //Supprimer du vecteur le missile
+	}
+    }
+}
+
+void	MissileCommand::_draw()
+{
+  /* Instructions d'affichage */
+  _window.clearWindow();
+  _window.draw("BACKGROUND",0,0);
+
+  //Instruction d'affichage à placer ici pour tester. Les objets dessinés en premier seront à l'arrière-plan et ceux dessinés en dernier seront au premier plan
+  for (int cpt = 0; cpt < _tabMissiles.size(); cpt++)
+    {
+      _window.draw("MISSILE_FOE", _tabMissiles[cpt].getPosition().x, _tabMissiles[cpt].getPosition().y);
+    }
+  _window.draw("CANON", _canonPosition);
+  _window.draw("TARGET", _window.getMouse());
+  _window.display();
 }

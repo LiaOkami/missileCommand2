@@ -5,6 +5,7 @@
 #ifndef _MISSILECOMMAND_HH_
 # define _MISSILECOMMAND_HH_
 
+# include "Missile.hh"
 # include "SFMLHandler.hh"
 
 /** \brief Classe contenant tout le jeu Missile Command
@@ -14,6 +15,14 @@ class MissileCommand
 {
 private:
   SFMLHandler	_window;
+  vector <sf::Sprite>	_tabMissiles;
+  std::vector<Missile>	_tabMissAlly;
+  Position		_canonPosition;
+  sf::Event		_event;
+  sf::Clock		_chrono;
+  sf::Clock		_apparition;
+  sf::Time		_dureeMax;
+  sf::Time		_dureeApparition;
 
 public:
   /** \brief Constructeur par défaut
@@ -27,9 +36,9 @@ public:
    */
   void	launch();
 
-  void	update();
-
-  void	draw();
+private:
+  void	_update();
+  void	_draw();
 };
 
 #endif
