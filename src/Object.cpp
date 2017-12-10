@@ -27,3 +27,8 @@ void Object::draw(SFMLHandler& handler) const
 {
     handler.draw(_key, _pos);
 }
+
+const string&	Object::getKey() const
+{
+  return _key;
+}

@@ -47,7 +47,7 @@ public:
 
     void setKey(const string &key);/**< \brief _Key setter */
 
-
+    const string &	getKey() const; /**< \brief _key getter */
 
 };
 
