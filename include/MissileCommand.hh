@@ -15,7 +15,7 @@ class MissileCommand
 {
 private:
   SFMLHandler	_window;
-  vector <sf::Sprite>	_tabMissiles;
+  std::vector<Missile>	_tabMissFoe;
   std::vector<Missile>	_tabMissAlly;
   Position		_canonPosition;
   sf::Clock		_chrono;
