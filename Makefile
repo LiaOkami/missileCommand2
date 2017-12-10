@@ -5,7 +5,7 @@
 ## Login   <pierrick.garcia@u-psud.fr>
 ##
 ## Started on  Tue Oct 10 13:52:27 2017 Pierrick Garcia
-## Last update Fri Nov 24 10:12:22 2017 Pierrick Garcia
+## Last update Sun Dec 10 11:46:44 2017 Pierrick Garcia
 ##
 
 COMP		= g++
@@ -28,7 +28,8 @@ SRC		= src/main.cpp \
 		  src/MissileCommand.cpp \
 		  src/SFMLHandler.cpp \
 		  src/Object.cpp \
-		  src/Missile.cpp
+		  src/Missile.cpp \
+		  src/Explosion.cpp
 
 OBJ		= $(SRC:.cpp=.o)
 
