@@ -36,7 +36,7 @@ public:
    */
   ~SFMLHandler();
 
-  /** \brief Charge un asset dans la map d'assets;
+  /** \brief Charge un asset dans la map d'assets
    * \param chaine, clé d'une sprite
    * \param chaine, chemin relatif de l'emplacement de l'asset
    * \param réel, échelle de l'image
@@ -44,7 +44,17 @@ public:
    */
   void	loadAsset(const std::string & key, const std::string & filename, float scale = 1, int rotation = 0);
 
-  /** \brief Charge un asset dans la map d'assets, en permettant de recadrer l'image;
+    /** \brief Charge un asset dans la map d'assets, en permettant de changer l'origine du sprite
+   * \param chaine, clé d'une sprite
+   * \param chaine, chemin relatif de l'emplacement de l'asset
+   * \param réel, échelle de l'image
+   * \param entier, rotation en degrés de l'image
+   * \param entier, coordonnée x de l'origine
+   * \param entier, coordonnée y de l'origine
+   */
+  void loadAsset(const std::string & key, const std::string & filename, float scale, int rotation, int originX, int originY);
+
+  /** \brief Charge un asset dans la map d'assets, en permettant de recadrer l'image
    * \param chaine, clé d'une sprite
    * \param chaine, chemin relatif de l'emplacement de l'asset
    * \param réel, échelle de l'image
@@ -66,12 +76,12 @@ public:
    */
   void	draw(const std::string & key, Position pos);
 
-  /** \brief Dessine l'objet dans la fenêtre [Surcharge]
+  /** \brief Dessine l'objet dans la fenêtre
    * \param chaine, clé d'un asset
-   * \param reel, coordonée x
-   * \param reel, coordonée y
+   * \param Position, position de l'objet à dessiner
+   * \param reel, rotation de l'objet
    */
-  void	draw(const std::string & key, float x, float y); // temporaire, pour les tests
+  void	draw(const std::string & key, Position pos, double rot); // temporaire, pour les tests
 
   /** \brief Affiche l'ensemble des objet dessinés
    *

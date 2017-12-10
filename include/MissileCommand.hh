@@ -38,6 +38,7 @@ public:
 private:
   void	_pollEvents();
   void	_update();
+  void	_checkCollision(const Object &missile);
   void	_draw();
 };
 

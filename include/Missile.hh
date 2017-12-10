@@ -36,6 +36,7 @@ public:
      *  \return booléen; retourne vrai quand l'ordonnée du missile a atteint son ordonnée de position finale, reçue en paramètres initiaux
      */
   bool	isEnded() const;
+  double	getAngle() const;
 };
 
 #endif // _MISSILE_HH_

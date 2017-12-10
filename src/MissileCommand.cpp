@@ -16,8 +16,8 @@ MissileCommand::MissileCommand() :
     _dureeApparition = sf::seconds(1);
 
     /* Chargement des Assets */
-    _window.loadAsset("MISSILE_ALLY","assets/Missile_Ally.png",0.5, 0);
-    _window.loadAsset("MISSILE_FOE","assets/Missile_Foe.png",0.5, 0);
+    _window.loadAsset("MISSILE_ALLY","assets/Missile_Ally.png",0.5, 0, 65/2, 250/2);
+    _window.loadAsset("MISSILE_FOE","assets/Missile_Foe.png",0.5, 0, 65/2, 250/2);
     _window.loadAsset("CANON","assets/Canon.png");
     _window.loadAsset("TARGET", "assets/TargetCursor.png");
     _window.loadAsset("BACKGROUND", "assets/MissileCommand_Background.jpg");
@@ -100,7 +100,23 @@ void	MissileCommand::_update()
 	}
     }
 
-  /** \brief Provoque une explosion quand un missile allié atteint sa position finale */
+  /* TMP Détruit un missile et les missiles ennemis le touchant */
+  unsigned int cpt;
+
+  cpt = 0;
+  while (cpt < _tabMissAlly.size())
+    {
+      if (_tabMissAlly[cpt].isEnded())
+	{
+	  _checkCollision(_tabMissAlly[cpt]);
+	  _tabMissAlly.erase(_tabMissAlly.begin() + cpt);
+	}
+      else
+	cpt += 1;
+    }
+
+
+  /** TODO \brief Provoque une explosion quand un missile allié atteint sa position finale */
   for(int cpt = 0; cpt<_tabMissAlly.size();cpt++)
     {
       if (_tabMissAlly[cpt].isEnded())
@@ -108,6 +124,23 @@ void	MissileCommand::_update()
 	  Explosion e1(_tabMissAlly[cpt].getPos());
 	  //Supprimer du vecteur le missile
 	}
+    }
+}
+
+void		MissileCommand::_checkCollision(const Object &missile)
+{
+  unsigned int	cpt;
+
+  cpt = 0;
+  while (cpt < _tabMissFoe.size())
+    {
+      if (_window.objectIntersects(missile.getKey(), missile.getPos(),
+				   _tabMissFoe[cpt].getKey(), _tabMissFoe[cpt].getPos()))
+	{
+	  _tabMissFoe.erase(_tabMissFoe.begin() + cpt);
+	}
+      else
+	cpt += 1;
     }
 }
 
@@ -119,9 +152,9 @@ void	MissileCommand::_draw()
 
   //Instruction d'affichage à placer ici pour tester. Les objets dessinés en premier seront à l'arrière-plan et ceux dessinés en dernier seront au premier plan
   for (const Missile & missile:_tabMissFoe)
-    _window.draw("MISSILE_FOE", missile.getPos());
+    _window.draw("MISSILE_FOE", missile.getPos(), missile.getAngle());
   for (const Missile & missile:_tabMissAlly)
-    _window.draw("MISSILE_ALLY", missile.getPos());
+    _window.draw("MISSILE_ALLY", missile.getPos(), missile.getAngle());
   _window.draw("CANON", _canonPosition);
   _window.draw("TARGET", _window.getMouse());
   _window.display();
