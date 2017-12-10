@@ -152,9 +152,9 @@ void	MissileCommand::_draw()
 
   //Instruction d'affichage à placer ici pour tester. Les objets dessinés en premier seront à l'arrière-plan et ceux dessinés en dernier seront au premier plan
   for (const Missile & missile:_tabMissFoe)
-    _window.draw("MISSILE_FOE", missile.getPos());
+    _window.draw("MISSILE_FOE", missile.getPos(), missile.getAngle());
   for (const Missile & missile:_tabMissAlly)
-    _window.draw("MISSILE_ALLY", missile.getPos());
+    _window.draw("MISSILE_ALLY", missile.getPos(), missile.getAngle());
   _window.draw("CANON", _canonPosition);
   _window.draw("TARGET", _window.getMouse());
   _window.display();
