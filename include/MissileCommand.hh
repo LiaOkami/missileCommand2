@@ -5,11 +5,16 @@
 #ifndef _MISSILECOMMAND_HH_
 # define _MISSILECOMMAND_HH_
 
+# include "SFMLHandler.hh"
+
 /** \brief Classe contenant tout le jeu Missile Command
  *  \author Pierrick Garcia
  */
 class MissileCommand
 {
+private:
+  SFMLHandler	_window;
+
 public:
   /** \brief Constructeur par défaut
    */
