@@ -29,7 +29,9 @@ SRC		= src/main.cpp \
 		  src/SFMLHandler.cpp \
 		  src/Object.cpp \
 		  src/Missile.cpp \
-		  src/Explosion.cpp
+		  src/Explosion.cpp\
+		  src/City.cpp\
+		  src/Canon.cpp
 
 OBJ		= $(SRC:.cpp=.o)
 
