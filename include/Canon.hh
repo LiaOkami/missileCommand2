@@ -2,6 +2,7 @@
 #define CANON_HH_INCLUDED
 
 # include "Object.hh"
+# include "Missile.hh"
 
 class Canon : public Object
 {
@@ -16,6 +17,8 @@ public:
      *  Construction d'un canon, ayant en paramètre une position
      */
   Canon(const Position & posCan);
+
+  Missile	shoot(const Position &target);
 };
 
 #endif // CANON_HH_INCLUDED

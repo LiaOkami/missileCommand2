@@ -7,3 +7,8 @@ Canon::Canon(const Position &posCan)
 {
 
 }
+
+Missile	Canon::shoot(const Position& target)
+{
+  return (Missile(12, this->getPos(), target, "MISSILE_ALLY"));
+}
