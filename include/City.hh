@@ -14,11 +14,11 @@ public:
     /** \brief Constructeur par défaut
      *
      *  \param Position posCity      :Position
-     *  \param const string& key     :chaine, clé d'une sprite d'un Object
      *
-     *  Construction d'une ville, ayant en paramètres une position, et une key
+     *  Construction d'une ville, ayant en paramètre une position
      */
-  City(Position posCity, const string& key);
+  City(const Position &posCity);
 
 };
+
 #endif // CITY_HH_INCLUDED

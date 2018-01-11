@@ -1,14 +1,9 @@
-#include "Object.hh"
 #include "Canon.hh"
-
 
 using namespace std;
 
-Canon::Canon(Position posCan, const string& key)
-    : Object(posCan, key)
-    {
-        Position posCan = this->getPos();
+Canon::Canon(const Position &posCan)
+  : Object(posCan, "CANON")
+{
 
-        _posCan = posCan;
-
-    }
+}

@@ -1,14 +1,10 @@
 #include "Object.hh"
 #include "City.hh"
 
-
 using namespace std;
 
-City::City(Position posCity, const string& key)
-    : Object(posCity, key)
-    {
-        Position posCity = this->getPos();
+City::City(const Position &posCity)
+  : Object(posCity, "CITY")
+{
 
-        _posCity = posCity;
-
-    }
+}
