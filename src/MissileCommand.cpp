@@ -123,7 +123,7 @@ void	MissileCommand::_update()
 
 
   /** TODO \brief Provoque une explosion quand un missile allié atteint sa position finale */
-  for(int cpt = 0; cpt<_tabMissAlly.size();cpt++)
+  for (unsigned int cpt = 0; cpt<_tabMissAlly.size();cpt++)
     {
       if (_tabMissAlly[cpt].isEnded())
 	{
