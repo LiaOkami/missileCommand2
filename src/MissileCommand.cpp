@@ -10,7 +10,7 @@ using namespace std;
 
 
 MissileCommand::MissileCommand() :
-  _window(800, 600), _canon(Position(368.0, 467.0))
+  _window(WINDOW_WIDTH, WINDOW_HEIGHT), _canon(Position(368.0, 467.0))
 {
     _dureeMax = sf::milliseconds(100);
     _dureeApparition = sf::seconds(1);
@@ -19,8 +19,14 @@ MissileCommand::MissileCommand() :
     _window.loadAsset("MISSILE_ALLY","assets/Missile_Ally.png",0.5, 0, 65/2, 250/2);
     _window.loadAsset("MISSILE_FOE","assets/Missile_Foe.png",0.5, 0, 65/2, 250/2);
     _window.loadAsset("CANON","assets/Canon.png");
+    _window.loadAsset("CITY","assets/City.png");
     _window.loadAsset("TARGET", "assets/TargetCursor.png");
     _window.loadAsset("BACKGROUND", "assets/MissileCommand_Background.jpg");
+
+    _cities.push_back(City(Position(20, WINDOW_HEIGHT - 70)));
+    _cities.push_back(City(Position(170, WINDOW_HEIGHT - 70)));
+    _cities.push_back(City(Position(647, WINDOW_HEIGHT - 70)));
+    _cities.push_back(City(Position(497, WINDOW_HEIGHT - 70)));
 }
 
 
@@ -154,6 +160,8 @@ void	MissileCommand::_draw()
     _window.draw("MISSILE_FOE", missile.getPos(), missile.getAngle());
   for (const Missile & missile:_tabMissAlly)
     _window.draw("MISSILE_ALLY", missile.getPos(), missile.getAngle());
+  for (const City & city:_cities)
+    _window.draw("CITY", city.getPos());
   _window.draw("CANON", _canon.getPos());
   _window.draw("TARGET", _window.getMouse());
   _window.display();
