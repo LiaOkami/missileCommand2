@@ -10,7 +10,7 @@ using namespace std;
 
 
 MissileCommand::MissileCommand() :
-  _window(WINDOW_WIDTH, WINDOW_HEIGHT), _canon(Position(368.0, 467.0))
+  _window(WINDOW_WIDTH, WINDOW_HEIGHT)
 {
     _dureeMax = sf::milliseconds(100);
     _dureeApparition = sf::seconds(1);
@@ -23,10 +23,13 @@ MissileCommand::MissileCommand() :
     _window.loadAsset("TARGET", "assets/TargetCursor.png");
     _window.loadAsset("BACKGROUND", "assets/MissileCommand_Background.jpg");
 
-    _cities.push_back(City(Position(20, WINDOW_HEIGHT - 70)));
-    _cities.push_back(City(Position(170, WINDOW_HEIGHT - 70)));
-    _cities.push_back(City(Position(647, WINDOW_HEIGHT - 70)));
-    _cities.push_back(City(Position(497, WINDOW_HEIGHT - 70)));
+    _cities.push_back(City(Position(100, WINDOW_HEIGHT - 70)));
+    _cities.push_back(City(Position(270, WINDOW_HEIGHT - 70)));
+    _cities.push_back(City(Position(847, WINDOW_HEIGHT - 70)));
+    _cities.push_back(City(Position(697, WINDOW_HEIGHT - 70)));
+    _canons.push_back(Canon(Position(0, WINDOW_HEIGHT - 133)));
+    _canons.push_back(Canon(Position(WINDOW_WIDTH / 2 - 32, WINDOW_HEIGHT - 133)));
+    _canons.push_back(Canon(Position(WINDOW_WIDTH - 64, WINDOW_HEIGHT - 133)));
 }
 
 
@@ -60,7 +63,7 @@ void	MissileCommand::_pollEvents()
       if(event.type == sf::Event::MouseButtonPressed &&
 	 event.mouseButton.button == sf::Mouse::Left)
 	{
-	  _tabMissAlly.push_back(_canon.shoot(_window.getMouse()));
+	  _tabMissAlly.push_back(_canons[0].shoot(_window.getMouse()));
 	  cout << "Création d'un missile allié" << endl;
 	}
     }
@@ -162,7 +165,8 @@ void	MissileCommand::_draw()
     _window.draw("MISSILE_ALLY", missile.getPos(), missile.getAngle());
   for (const City & city:_cities)
     _window.draw("CITY", city.getPos());
-  _window.draw("CANON", _canon.getPos());
+  for (const Canon & canon:_canons)
+     _window.draw("CANON", canon.getPos());
   _window.draw("TARGET", _window.getMouse());
   _window.display();
 }

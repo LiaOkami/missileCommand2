@@ -10,8 +10,8 @@
 # include "City.hh"
 # include "SFMLHandler.hh"
 
-static const int	WINDOW_WIDTH = 800;
-static const int	WINDOW_HEIGHT = 600;
+static const int	WINDOW_WIDTH = 1200;
+static const int	WINDOW_HEIGHT = 900;
 
 /** \brief Classe contenant tout le jeu Missile Command
  *  \author Pierrick Garcia
@@ -20,7 +20,7 @@ class MissileCommand
 {
 private:
   SFMLHandler	_window;
-  Canon			_canon;
+  std::vector<Canon>	_canons;
   std::vector<City>	_cities;
   std::vector<Missile>	_tabMissFoe;
   std::vector<Missile>	_tabMissAlly;
