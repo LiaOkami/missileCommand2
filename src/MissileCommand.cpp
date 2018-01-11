@@ -93,30 +93,28 @@ void	MissileCommand::_update()
       cout << "Création d'un missile" << endl;
     }
 
-  /** \brief supprime les missiles en dehors de la fenêtre */
-  for(int cpt1 = 0; cpt1 < _tabMissFoe.size(); cpt1++)
+  /** \brief supprime les missiles ennemis arrivés */
+  unsigned int cpt;
+
+  cpt = 0;
+  while (cpt < _tabMissFoe.size())
     {
-      if(_tabMissFoe[cpt1].getPos().y > _window.getSize().y-50)
+      if (_tabMissFoe[cpt].isEnded())
 	{
-	  cout << "Missile sorti ( " << _tabMissFoe[cpt1].getPos().y << " > " << _window.getSize().y-50 << " ). ";
-	  for(int cpt2 = cpt1; cpt2 < _tabMissFoe.size() - 1; cpt2++)
-	    {
-	      _tabMissFoe[cpt2] = _tabMissFoe[cpt2+1];
-	    }
-	  cout << "Missile supprimé." << endl;
-	  _tabMissFoe.pop_back();
+	  _checkCollision(_tabMissFoe[cpt], _cities);
+	  _tabMissFoe.erase(_tabMissFoe.begin() + cpt);
 	}
+      else
+	cpt += 1;
     }
 
   /* TMP Détruit un missile et les missiles ennemis le touchant */
-  unsigned int cpt;
-
   cpt = 0;
   while (cpt < _tabMissAlly.size())
     {
       if (_tabMissAlly[cpt].isEnded())
 	{
-	  _checkCollision(_tabMissAlly[cpt]);
+	  _checkCollision(_tabMissAlly[cpt], _tabMissFoe);
 	  _tabMissAlly.erase(_tabMissAlly.begin() + cpt);
 	}
       else
@@ -135,17 +133,32 @@ void	MissileCommand::_update()
     }
 }
 
-void		MissileCommand::_checkCollision(const Object &missile)
+void		MissileCommand::_checkCollision(const Object &object, std::vector<Missile> &objects)
 {
-  unsigned int	cpt;
+  unsigned int	cpt = 0;
 
-  cpt = 0;
-  while (cpt < _tabMissFoe.size())
+  while (cpt < objects.size())
     {
-      if (_window.objectIntersects(missile.getKey(), missile.getPos(),
-				   _tabMissFoe[cpt].getKey(), _tabMissFoe[cpt].getPos()))
+      if (_window.objectIntersects(object.getKey(), object.getPos(),
+				   objects[cpt].getKey(), objects[cpt].getPos()))
 	{
-	  _tabMissFoe.erase(_tabMissFoe.begin() + cpt);
+	  objects.erase(objects.begin() + cpt);
+	}
+      else
+	cpt += 1;
+    }
+}
+
+void		MissileCommand::_checkCollision(const Object &object, std::vector<City> &objects)
+{
+  unsigned int	cpt = 0;
+
+  while (cpt < objects.size())
+    {
+      if (_window.objectIntersects(object.getKey(), object.getPos(),
+				   objects[cpt].getKey(), objects[cpt].getPos()))
+	{
+	  objects.erase(objects.begin() + cpt);
 	}
       else
 	cpt += 1;
