@@ -10,7 +10,7 @@ using namespace std;
 
 
 MissileCommand::MissileCommand() :
-  _window(800, 600), _canonPosition(368.0, 467.0)
+  _window(800, 600), _canon(Position(368.0, 467.0))
 {
     _dureeMax = sf::milliseconds(100);
     _dureeApparition = sf::seconds(1);
@@ -54,8 +54,7 @@ void	MissileCommand::_pollEvents()
       if(event.type == sf::Event::MouseButtonPressed &&
 	 event.mouseButton.button == sf::Mouse::Left)
 	{
-	  Missile m1(12, _canonPosition, _window.getMouse(), "MISSILE_ALLY");
-	  _tabMissAlly.push_back(m1);
+	  _tabMissAlly.push_back(_canon.shoot(_window.getMouse()));
 	  cout << "Création d'un missile allié" << endl;
 	}
     }
@@ -155,7 +154,7 @@ void	MissileCommand::_draw()
     _window.draw("MISSILE_FOE", missile.getPos(), missile.getAngle());
   for (const Missile & missile:_tabMissAlly)
     _window.draw("MISSILE_ALLY", missile.getPos(), missile.getAngle());
-  _window.draw("CANON", _canonPosition);
+  _window.draw("CANON", _canon.getPos());
   _window.draw("TARGET", _window.getMouse());
   _window.display();
 }

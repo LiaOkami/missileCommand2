@@ -6,6 +6,7 @@
 # define _MISSILECOMMAND_HH_
 
 # include "Missile.hh"
+# include "Canon.hh"
 # include "SFMLHandler.hh"
 
 /** \brief Classe contenant tout le jeu Missile Command
@@ -15,7 +16,7 @@ class MissileCommand
 {
 private:
   SFMLHandler	_window;
-  Position		_canonPosition;
+  Canon			_canon;
   std::vector<Missile>	_tabMissFoe;
   std::vector<Missile>	_tabMissAlly;
   sf::Clock		_chrono;
