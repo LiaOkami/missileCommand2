@@ -22,7 +22,7 @@ MissileCommand::MissileCommand() :
     _window.loadAsset("CANON","assets/Canon.png");
     _window.loadAsset("CITY","assets/City.png");
     _window.loadAsset("TARGET", "assets/TargetCursor.png");
-    _window.loadAsset("BACKGROUND", "assets/MissileCommand_Background.jpg");
+    _window.loadAsset("BACKGROUND", "assets/MissileCommand_Background.png");
 
     _cities.push_back(City(Position(100, WINDOW_HEIGHT - 70)));
     _cities.push_back(City(Position(270, WINDOW_HEIGHT - 70)));
@@ -179,7 +179,7 @@ void	MissileCommand::_draw()
 {
   /* Instructions d'affichage */
   _window.clearWindow();
-  _window.draw("BACKGROUND",0,0);
+  _window.draw("BACKGROUND", Position(0, 0));
 
   //Instruction d'affichage à placer ici pour tester. Les objets dessinés en premier seront à l'arrière-plan et ceux dessinés en dernier seront au premier plan
   for (const Missile & missile:_tabMissFoe)
