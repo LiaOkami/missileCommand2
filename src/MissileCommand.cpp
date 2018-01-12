@@ -35,6 +35,7 @@ MissileCommand::MissileCommand() :
 
 void	MissileCommand::launch()
 {
+    score=0;
     /* Boucle Principale */
     while (_window.getWindow().isOpen())
     {
@@ -63,7 +64,21 @@ void	MissileCommand::_pollEvents()
       if(event.type == sf::Event::MouseButtonPressed &&
 	 event.mouseButton.button == sf::Mouse::Left)
 	{
-	  _tabMissAlly.push_back(_canons[0].shoot(_window.getMouse()));
+	  unsigned int numCanon;
+	  if(_window.getMouse().x<WINDOW_WIDTH/3)
+    {
+      numCanon=0;
+    }
+      else if(_window.getMouse().x>WINDOW_WIDTH/3*2)
+    {
+      numCanon=2;
+    }
+      else
+    {
+      numCanon=1;
+    }
+
+	  _tabMissAlly.push_back(_canons[numCanon].shoot(_window.getMouse()));
 	  cout << "Création d'un missile allié" << endl;
 	}
     }
@@ -81,7 +96,7 @@ void	MissileCommand::_update()
       _chrono.restart();
     }
 
-  /** \brief ajoute un missile au tableau de missiles lorsque la duée d'apparition est écoulée */
+  /** \brief ajoute un missile au tableau de missiles lorsque la durée d'apparition est écoulée */
   if (_apparition.getElapsedTime() > _dureeApparition)
     {
       Position	posBeg(rand() % (_window.getSize().x - 78 / 2) + 78 / 2, 0);
@@ -114,8 +129,14 @@ void	MissileCommand::_update()
     {
       if (_tabMissAlly[cpt].isEnded())
 	{
-	  _checkCollision(_tabMissAlly[cpt], _tabMissFoe);
+	  score+=_checkCollision(_tabMissAlly[cpt], _tabMissFoe);
 	  _tabMissAlly.erase(_tabMissAlly.begin() + cpt);
+	  /*if(missDestroy)
+    {
+      score++;
+    }*/
+      /* TMP Affiche le score dans la fenetre de commande */
+      cout << score << endl;
 	}
       else
 	cpt += 1;
@@ -126,27 +147,29 @@ void	MissileCommand::_update()
   for (unsigned int cpt = 0; cpt<_tabMissAlly.size();cpt++)
     {
       if (_tabMissAlly[cpt].isEnded())
-	{
-	  Explosion e1(_tabMissAlly[cpt].getPos());
-	  //Supprimer du vecteur le missile
-	}
+        {
+            Explosion e1(_tabMissAlly[cpt].getPos());
+            //Supprimer du vecteur le missile
+        }
     }
 }
 
-void		MissileCommand::_checkCollision(const Object &object, std::vector<Missile> &objects)
+int		    MissileCommand::_checkCollision(const Object &object, std::vector<Missile> &objects)
 {
   unsigned int	cpt = 0;
-
+  int destroy=0;
   while (cpt < objects.size())
     {
       if (_window.objectIntersects(object.getKey(), object.getPos(),
 				   objects[cpt].getKey(), objects[cpt].getPos()))
 	{
 	  objects.erase(objects.begin() + cpt);
+	  destroy++;
 	}
       else
 	cpt += 1;
     }
+    return destroy;
 }
 
 void		MissileCommand::_checkCollision(const Object &object, std::vector<City> &objects)
@@ -162,6 +185,10 @@ void		MissileCommand::_checkCollision(const Object &object, std::vector<City> &o
 	}
       else
 	cpt += 1;
+	  if(objects.empty())
+	{
+	  //Defaite du joueur
+	}
     }
 }
 

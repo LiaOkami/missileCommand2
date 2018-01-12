@@ -28,6 +28,7 @@ private:
   sf::Clock		_apparition;
   sf::Time		_dureeMax;
   sf::Time		_dureeApparition;
+  unsigned int  score;
 
 public:
   /** \brief Constructeur par défaut
@@ -45,7 +46,7 @@ private:
   void	_pollEvents();
   void	_update();
   void	_checkCollision(const Object &object, std::vector<City> &objects);
-  void	_checkCollision(const Object &object, std::vector<Missile> &objects);
+  int	_checkCollision(const Object &object, std::vector<Missile> &objects);
   void	_draw();
 };
 
