@@ -163,7 +163,7 @@ int		    MissileCommand::_checkCollision(const Object &object, std::vector<Missi
       if (_window.objectIntersects(object.getKey(), object.getPos(),
 				   objects[cpt].getKey(), objects[cpt].getPos()))
 	{
-	  objects.erase(objects.begin() + cpt);
+      objects.erase(objects.begin() + cpt);
 	  destroy++;
 	}
       else
