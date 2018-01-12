@@ -65,20 +65,7 @@ void	MissileCommand::_pollEvents()
       if(event.type == sf::Event::MouseButtonPressed &&
 	 event.mouseButton.button == sf::Mouse::Left)
 	{
-	  unsigned int numCanon;
-	  if(_window.getMouse().x<WINDOW_WIDTH/3)
-    {
-      numCanon=0;
-    }
-      else if(_window.getMouse().x>WINDOW_WIDTH/3*2)
-    {
-      numCanon=2;
-    }
-      else
-    {
-      numCanon=1;
-    }
-
+	  unsigned int numCanon = _window.getMouse().x / (WINDOW_WIDTH / 3);
 	  _tabMissAlly.push_back(_canons[numCanon].shoot(_window.getMouse()));
 	  cout << "Création d'un missile allié" << endl;
 	}
@@ -148,10 +135,10 @@ void	MissileCommand::_update()
   for (unsigned int cpt = 0; cpt<_tabMissAlly.size();cpt++)
     {
       if (_tabMissAlly[cpt].isEnded())
-        {
-            Explosion e1(_tabMissAlly[cpt].getPos());
-            //Supprimer du vecteur le missile
-        }
+	{
+	    Explosion e1(_tabMissAlly[cpt].getPos());
+	    //Supprimer du vecteur le missile
+	}
     }
 }
 
