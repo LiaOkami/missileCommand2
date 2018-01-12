@@ -36,7 +36,7 @@ MissileCommand::MissileCommand() :
 
 void	MissileCommand::launch()
 {
-    score=0;
+    score = 0;
     /* Boucle Principale */
     while (_window.getWindow().isOpen())
     {
@@ -117,12 +117,8 @@ void	MissileCommand::_update()
     {
       if (_tabMissAlly[cpt].isEnded())
 	{
-    score+=_checkCollision(_tabMissAlly[cpt], _tabMissFoe);
+	  _checkCollision(_tabMissAlly[cpt], _tabMissFoe);
 	  _tabMissAlly.erase(_tabMissAlly.begin() + cpt);
-	  /*if(missDestroy)
-    {
-      score++;
-    }*/
       /* TMP Affiche le score dans la fenetre de commande */
       cout << score << endl;
 	}
@@ -142,22 +138,21 @@ void	MissileCommand::_update()
     }
 }
 
-int		    MissileCommand::_checkCollision(const Object &object, std::vector<Missile> &objects)
+void		MissileCommand::_checkCollision(const Object &object, std::vector<Missile> &objects)
 {
   unsigned int	cpt = 0;
-  int destroy=0;
+
   while (cpt < objects.size())
     {
       if (_window.objectIntersects(object.getKey(), object.getPos(),
 				   objects[cpt].getKey(), objects[cpt].getPos()))
 	{
-      objects.erase(objects.begin() + cpt);
-	  destroy++;
+	  objects.erase(objects.begin() + cpt);
+	  score++;
 	}
       else
 	cpt += 1;
     }
-    return destroy;
 }
 
 void		MissileCommand::_checkCollision(const Object &object, std::vector<City> &objects)

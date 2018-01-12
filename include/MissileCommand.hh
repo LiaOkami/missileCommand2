@@ -46,7 +46,7 @@ private:
   void	_pollEvents();
   void	_update();
   void	_checkCollision(const Object &object, std::vector<City> &objects);
-  int	_checkCollision(const Object &object, std::vector<Missile> &objects);
+  void	_checkCollision(const Object &object, std::vector<Missile> &objects);
   void	_draw();
 };
 
