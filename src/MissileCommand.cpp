@@ -22,7 +22,7 @@ MissileCommand::MissileCommand() :
     _window.loadAsset("CANON","assets/Canon.png");
     _window.loadAsset("CITY","assets/City.png");
     _window.loadAsset("TARGET", "assets/TargetCursor.png");
-    _window.loadAsset("BACKGROUND", "assets/MissileCommand_Background.jpg");
+    _window.loadAsset("BACKGROUND", "assets/MissileCommand_Background.png");
 
     _cities.push_back(City(Position(100, WINDOW_HEIGHT - 70)));
     _cities.push_back(City(Position(270, WINDOW_HEIGHT - 70)));
@@ -36,7 +36,7 @@ MissileCommand::MissileCommand() :
 
 void	MissileCommand::launch()
 {
-    score=0;
+    score = 0;
     /* Boucle Principale */
     while (_window.getWindow().isOpen())
     {
@@ -65,20 +65,7 @@ void	MissileCommand::_pollEvents()
       if(event.type == sf::Event::MouseButtonPressed &&
 	 event.mouseButton.button == sf::Mouse::Left)
 	{
-	  unsigned int numCanon;
-	  if(_window.getMouse().x<WINDOW_WIDTH/3)
-    {
-      numCanon=0;
-    }
-      else if(_window.getMouse().x>WINDOW_WIDTH/3*2)
-    {
-      numCanon=2;
-    }
-      else
-    {
-      numCanon=1;
-    }
-
+	  unsigned int numCanon = _window.getMouse().x / (WINDOW_WIDTH / 3);
 	  _tabMissAlly.push_back(_canons[numCanon].shoot(_window.getMouse()));
 	  cout << "Création d'un missile allié" << endl;
 	}
@@ -130,12 +117,8 @@ void	MissileCommand::_update()
     {
       if (_tabMissAlly[cpt].isEnded())
 	{
-    score+=_checkCollision(_tabMissAlly[cpt], _tabMissFoe);
+	  _checkCollision(_tabMissAlly[cpt], _tabMissFoe);
 	  _tabMissAlly.erase(_tabMissAlly.begin() + cpt);
-	  /*if(missDestroy)
-    {
-      score++;
-    }*/
       /* TMP Affiche le score dans la fenetre de commande */
       cout << score << endl;
 	}
@@ -148,29 +131,28 @@ void	MissileCommand::_update()
   for (unsigned int cpt = 0; cpt<_tabMissAlly.size();cpt++)
     {
       if (_tabMissAlly[cpt].isEnded())
-        {
-            Explosion e1(_tabMissAlly[cpt].getPos());
-            //Supprimer du vecteur le missile
-        }
+	{
+	    Explosion e1(_tabMissAlly[cpt].getPos());
+	    //Supprimer du vecteur le missile
+	}
     }
 }
 
-int		    MissileCommand::_checkCollision(const Object &object, std::vector<Missile> &objects)
+void		MissileCommand::_checkCollision(const Object &object, std::vector<Missile> &objects)
 {
   unsigned int	cpt = 0;
-  int destroy=0;
+
   while (cpt < objects.size())
     {
       if (_window.objectIntersects(object.getKey(), object.getPos(),
 				   objects[cpt].getKey(), objects[cpt].getPos()))
 	{
-      objects.erase(objects.begin() + cpt);
-	  destroy++;
+	  objects.erase(objects.begin() + cpt);
+	  score++;
 	}
       else
 	cpt += 1;
     }
-    return destroy;
 }
 
 void		MissileCommand::_checkCollision(const Object &object, std::vector<City> &objects)
@@ -197,7 +179,7 @@ void	MissileCommand::_draw()
 {
   /* Instructions d'affichage */
   _window.clearWindow();
-  _window.draw("BACKGROUND",0,0);
+  _window.draw("BACKGROUND", Position(0, 0));
 
   //Instruction d'affichage à placer ici pour tester. Les objets dessinés en premier seront à l'arrière-plan et ceux dessinés en dernier seront au premier plan
   for (const Missile & missile:_tabMissFoe)
