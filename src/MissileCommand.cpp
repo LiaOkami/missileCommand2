@@ -2,6 +2,7 @@
 #include "Missile.hh"
 #include "Object.hh"
 #include "Explosion.hh"
+#include "Menu.hh"
 #include <vector>
 using namespace std;
 #include <cstdlib>

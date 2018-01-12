@@ -6,8 +6,6 @@ class Menu
 {
     public:
         Menu();
-        virtual ~Menu();
-    protected:
     private:
 };
 

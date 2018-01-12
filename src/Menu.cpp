@@ -4,8 +4,3 @@ Menu::Menu()
 {
     //ctor
 }
-
-Menu::~Menu()
-{
-    //dtor
-}
