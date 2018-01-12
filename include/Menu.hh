@@ -5,7 +5,7 @@
 class Menu
 {
     public:
-        Menu();
+        Menu(SFMLHandler &window);
     private:
 };
 
