@@ -129,7 +129,7 @@ void	MissileCommand::_update()
     {
       if (_tabMissAlly[cpt].isEnded())
 	{
-	  score+=_checkCollision(_tabMissAlly[cpt], _tabMissFoe);
+    score+=_checkCollision(_tabMissAlly[cpt], _tabMissFoe);
 	  _tabMissAlly.erase(_tabMissAlly.begin() + cpt);
 	  /*if(missDestroy)
     {
