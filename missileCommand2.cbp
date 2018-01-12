@@ -6,6 +6,7 @@
 		<Option makefile_is_custom="1" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
+		<Option virtualFolders="include/;" />
 		<MakeCommands>
 			<Build command="$make -f $makefile $target" />
 			<CompileFile command="$make -f $makefile $file" />
@@ -19,17 +20,24 @@
 				<Option output="missileCommand" prefix_auto="1" extension_auto="1" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Compiler>
+					<Add directory="include" />
+				</Compiler>
 			</Target>
 			<Target title="missileCommand">
 				<Option output="missileCommand" prefix_auto="1" extension_auto="1" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Compiler>
+					<Add directory="include" />
+				</Compiler>
 			</Target>
 		</Build>
 		<Unit filename="Makefile" />
 		<Unit filename="include/Canon.hh" />
 		<Unit filename="include/City.hh" />
 		<Unit filename="include/Explosion.hh" />
+		<Unit filename="include/Menu.hh" />
 		<Unit filename="include/Missile.hh" />
 		<Unit filename="include/MissileCommand.hh" />
 		<Unit filename="include/Object.hh" />
@@ -37,11 +45,23 @@
 		<Unit filename="include/SFMLHandler.hh" />
 		<Unit filename="src/Canon.cpp" />
 		<Unit filename="src/City.cpp" />
+		<Unit filename="src/Explosion.cpp" />
+		<Unit filename="src/Explosion.o" />
+		<Unit filename="src/Menu.cpp" />
+		<Unit filename="src/Menu.hh">
+			<Option virtualFolder="include/" />
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="src/Missile.cpp" />
+		<Unit filename="src/Missile.o" />
 		<Unit filename="src/MissileCommand.cpp" />
+		<Unit filename="src/MissileCommand.o" />
 		<Unit filename="src/Object.cpp" />
+		<Unit filename="src/Object.o" />
 		<Unit filename="src/SFMLHandler.cpp" />
+		<Unit filename="src/SFMLHandler.o" />
 		<Unit filename="src/main.cpp" />
+		<Unit filename="src/main.o" />
 		<Extensions>
 			<code_completion />
 			<envvars />
