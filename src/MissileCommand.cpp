@@ -32,11 +32,11 @@ MissileCommand::MissileCommand() :
     _canons.push_back(Canon(Position(WINDOW_WIDTH / 2 - 32, WINDOW_HEIGHT - 133)));
     _canons.push_back(Canon(Position(WINDOW_WIDTH - 64, WINDOW_HEIGHT - 133)));
 }
-  _menu(_window, this)
 
 
 void	MissileCommand::launch()
 {
+    _menu(_window, this);
     score = 0;
     /* Boucle Principale */
     while (_window.getWindow().isOpen())
