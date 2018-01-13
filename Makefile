@@ -31,7 +31,10 @@ SRC		= src/main.cpp \
 		  src/Missile.cpp \
 		  src/Explosion.cpp\
 		  src/City.cpp\
-		  src/Canon.cpp
+		  src/Canon.cpp\
+		  src/Menu.cpp\
+		  src/Level.cpp
+
 
 OBJ		= $(SRC:.cpp=.o)
 
