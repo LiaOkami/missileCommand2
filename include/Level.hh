@@ -6,7 +6,7 @@ class Level
 {
     public:
         Level();
-    protected:
+        void defLevel(int numLevel, int &nbMissileAlly, int &nbMissileFoe);
     private:
 };
 
