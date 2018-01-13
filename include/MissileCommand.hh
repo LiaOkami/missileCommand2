@@ -10,7 +10,6 @@
 # include "City.hh"
 # include "Explosion.hh"
 # include "SFMLHandler.hh"
-# include "Menu.hh"
 # include "Level.hh"
 
 static const int	WINDOW_WIDTH = 1200;
@@ -32,11 +31,11 @@ private:
   sf::Clock		_apparition;
   sf::Time		_dureeMax;
   sf::Time		_dureeApparition;
-  unsigned int	score;
-  Menu          _menu;
+  unsigned int		score;
   unsigned int  nbMissileAlly;
   unsigned int  nbMissileFoe;
   unsigned int  numLevel;
+
 
 public:
   /** \brief Constructeur par défaut
@@ -49,6 +48,7 @@ public:
    * L'intégralité du jeu est exécutée dans cette méthode.
    */
   void	launch();
+  SFMLHandler &	getWindow();
 
 private:
   void	_pollEvents();

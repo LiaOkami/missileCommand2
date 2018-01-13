@@ -37,7 +37,6 @@ MissileCommand::MissileCommand() :
 
 void	MissileCommand::launch()
 {
-    _menu(_window, this);
     score = 0;
     numLevel=1;
     nbMissileFoe=0;
@@ -57,12 +56,6 @@ void	MissileCommand::_pollEvents()
   /* Boucle d'évènements */
   while (_window.getWindow().pollEvent(event))
     {
-      if (event.type == sf::Event::Closed)
-	_menu.launch();
-      if (event.type == sf::Event::KeyPressed)
-	_menu.launch();
-
-
       /** \brief Si l'utilisateur clique sur le missile, il est supprimé
 	  UPDATE: Le clic sur l'écran doit envoyer un missile */
 
@@ -220,4 +213,9 @@ void	MissileCommand::_draw()
     _window.drawExplosion(explosion.getRay(), explosion.getPos());
   _window.draw("TARGET", _window.getMouse());
   _window.display();
+}
+
+SFMLHandler &	MissileCommand::getWindow()
+{
+  return _window;
 }
