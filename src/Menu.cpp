@@ -7,3 +7,14 @@ Menu::Menu(SFMLHandler &window)
     window.loadAsset("BUTTON_EXIT","assets/Button_Exit.png");
     window.loadAsset("BACKGROUND", "assets/MissileCommand_Background.jpg");
 }
+
+void Menu::launch()
+{
+
+}
+
+void Menu::draw()
+{
+    _window.clearWindow();
+    _window.draw("BACKGROUND", Position(0, 0));
+}
