@@ -1,6 +1,8 @@
 #include "Menu.hh"
+#include "MissileCommand.hh"
+#include "SFMLHandler.hh"
 
-Menu::Menu(SFMLHandler &window)
+Menu::Menu(SFMLHandler &_window, MissileCommand &game)
 {
     window.loadAsset("BUTTON_START","assets/Button_Start.png");
     window.loadAsset("BUTTON_EXIT","assets/Button_Exit.png");
@@ -21,9 +23,8 @@ void Menu::_draw()
 {
     _window.clearWindow();
     _window.draw("BACKGROUND", Position(0, 0));
-    _window.draw("BUTTON_START", Position(WINDOW_WIDTH/2 -130, WINDOW_HEIGHT/2 -300));
-    _window.draw("BUTTON_SCORE", Position(WINDOW_WIDTH/2 -130, WINDOW_HEIGHT/2 -54));
-    _window.draw("BUTTON_EXIT", Position(WINDOW_WIDTH/2 -130, WINDOW_HEIGHT/2 +192));
+    _window.draw("BUTTON_START", Position(WINDOW_WIDTH/2 -150, WINDOW_HEIGHT/2 -300));
+    _window.draw("BUTTON_EXIT", Position(WINDOW_WIDTH/2 -150, WINDOW_HEIGHT/2 +192));
 }
 
 void	MissileCommand::_pollEvents()
@@ -39,8 +40,20 @@ void	MissileCommand::_pollEvents()
         if(event.type == sf::Event::MouseButtonPressed &&
         event.mouseButton.button == sf::Mouse::Left)
         {
-            Position cursor=_window.getMouse();
-            //Tester le bouton selectionne et declencher action
+            if(_window.getMouse().x > WINDOW_WIDTH/2 -150 &&
+            _window.getMouse().x < WINDOW_WIDTH/2 +150 &&
+            _window.getMouse().y > WINDOW_HEIGHT/2 -300 &&
+            _window.getMouse().y < WINDOW_HEIGHT/2 -192)
+            {
+                game.launch();
+            }
+            if(_window.getMouse().x > WINDOW_WIDTH/2 -150 &&
+            _window.getMouse().x < WINDOW_WIDTH/2 +150 &&
+            _window.getMouse().y > WINDOW_HEIGHT/2 +192 &&
+            _window.getMouse().y < WINDOW_HEIGHT/2 -300)
+            {
+                _window.close();
+            }
         }
     }
 }
