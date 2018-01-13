@@ -37,6 +37,7 @@
 		<Unit filename="include/Canon.hh" />
 		<Unit filename="include/City.hh" />
 		<Unit filename="include/Explosion.hh" />
+		<Unit filename="include/Level.hh" />
 		<Unit filename="include/Menu.hh" />
 		<Unit filename="include/Missile.hh" />
 		<Unit filename="include/MissileCommand.hh" />
@@ -47,6 +48,7 @@
 		<Unit filename="src/City.cpp" />
 		<Unit filename="src/Explosion.cpp" />
 		<Unit filename="src/Explosion.o" />
+		<Unit filename="src/Level.cpp" />
 		<Unit filename="src/Menu.cpp" />
 		<Unit filename="src/Menu.hh">
 			<Option virtualFolder="include/" />
