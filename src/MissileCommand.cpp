@@ -74,6 +74,8 @@ void	MissileCommand::_pollEvents()
 
 void	MissileCommand::_update()
 {
+  unsigned int cpt;
+
   /** \brief fait bouger les missiles*/
   if (_chrono.getElapsedTime() > _dureeMax)
     {
@@ -83,6 +85,7 @@ void	MissileCommand::_update()
 	missile.move(1);
       _chrono.restart();
     }
+
 
   /** \brief ajoute un missile au tableau de missiles lorsque la durée d'apparition est écoulée */
   if (_apparition.getElapsedTime() > _dureeApparition)
@@ -96,15 +99,25 @@ void	MissileCommand::_update()
       cout << "Création d'un missile" << endl;
     }
 
-  /** \brief supprime les missiles ennemis arrivés */
-  unsigned int cpt;
+  /** \brief Agrandit les Explosions */
+  cpt = 0;
+  while (cpt < _explosions.size())
+    {
+      _explosions[cpt].update(1);
+      if (_explosions[cpt].isEnded())
+	_explosions.erase(_explosions.begin() + cpt);
+      else
+	cpt += 1;
+    }
 
+  /** \brief supprime les missiles ennemis arrivés */
   cpt = 0;
   while (cpt < _tabMissFoe.size())
     {
       if (_tabMissFoe[cpt].isEnded())
 	{
 	  _checkCollision(_tabMissFoe[cpt], _cities);
+	  _explosions.push_back(Explosion(_tabMissFoe[cpt].getPos()));
 	  _tabMissFoe.erase(_tabMissFoe.begin() + cpt);
 	}
       else
@@ -118,6 +131,7 @@ void	MissileCommand::_update()
       if (_tabMissAlly[cpt].isEnded())
 	{
 	  _checkCollision(_tabMissAlly[cpt], _tabMissFoe);
+	  _explosions.push_back(Explosion(_tabMissAlly[cpt].getPos()));
 	  _tabMissAlly.erase(_tabMissAlly.begin() + cpt);
       /* TMP Affiche le score dans la fenetre de commande */
       cout << score << endl;
@@ -189,7 +203,9 @@ void	MissileCommand::_draw()
   for (const City & city:_cities)
     _window.draw("CITY", city.getPos());
   for (const Canon & canon:_canons)
-     _window.draw("CANON", canon.getPos());
+    _window.draw("CANON", canon.getPos());
+  for (const Explosion & explosion:_explosions)
+    _window.drawExplosion(explosion.getRay(), explosion.getPos());
   _window.draw("TARGET", _window.getMouse());
   _window.display();
 }

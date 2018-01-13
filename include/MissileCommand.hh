@@ -8,6 +8,7 @@
 # include "Missile.hh"
 # include "Canon.hh"
 # include "City.hh"
+# include "Explosion.hh"
 # include "SFMLHandler.hh"
 
 static const int	WINDOW_WIDTH = 1200;
@@ -20,6 +21,7 @@ class MissileCommand
 {
 private:
   SFMLHandler	_window;
+  std::vector<Explosion>	_explosions;
   std::vector<Canon>	_canons;
   std::vector<City>	_cities;
   std::vector<Missile>	_tabMissFoe;
@@ -28,7 +30,7 @@ private:
   sf::Clock		_apparition;
   sf::Time		_dureeMax;
   sf::Time		_dureeApparition;
-  unsigned int  score;
+  unsigned int		score;
 
 public:
   /** \brief Constructeur par défaut
