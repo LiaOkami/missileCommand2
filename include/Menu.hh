@@ -9,6 +9,7 @@ class Menu
         void	launch();
     private:
         void	_draw();
+        void	_pollEvents();
 };
 
 #endif // MENU_H
