@@ -10,6 +10,7 @@
 # include "City.hh"
 # include "Explosion.hh"
 # include "SFMLHandler.hh"
+# include "Menu.hh"
 
 static const int	WINDOW_WIDTH = 1200;
 static const int	WINDOW_HEIGHT = 900;
@@ -31,6 +32,7 @@ private:
   sf::Time		_dureeMax;
   sf::Time		_dureeApparition;
   unsigned int		score;
+  Menu          _menu;
 
 public:
   /** \brief Constructeur par défaut

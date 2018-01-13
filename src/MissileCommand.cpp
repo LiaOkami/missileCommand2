@@ -32,6 +32,7 @@ MissileCommand::MissileCommand() :
     _canons.push_back(Canon(Position(WINDOW_WIDTH / 2 - 32, WINDOW_HEIGHT - 133)));
     _canons.push_back(Canon(Position(WINDOW_WIDTH - 64, WINDOW_HEIGHT - 133)));
 }
+  _menu(_window, this)
 
 
 void	MissileCommand::launch()
@@ -54,9 +55,9 @@ void	MissileCommand::_pollEvents()
   while (_window.getWindow().pollEvent(event))
     {
       if (event.type == sf::Event::Closed)
-	_window.close();
+	_menu.launch();
       if (event.type == sf::Event::KeyPressed)
-	_window.close();
+	_menu.launch();
 
 
       /** \brief Si l'utilisateur clique sur le missile, il est supprimé
