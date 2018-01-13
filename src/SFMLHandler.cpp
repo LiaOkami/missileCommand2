@@ -152,8 +152,10 @@ void SFMLHandler::drawExplosion(float radius, Position pos)
     sf::Vector2f exPos(pos.x,pos.y);
     explosion.setPosition(exPos);
     //Couleur
-    sf::Color explosionColor(240,224,83,1);
+    sf::Color explosionColor(240,224,83);
     explosion.setFillColor(explosionColor);
+    std::cout << "Explosion [" << explosion.getPosition().x << "," << explosion.getPosition().y
+	      << "] with " << radius << " rds" <<std::endl;
     _window.draw(explosion);
 }
 
