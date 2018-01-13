@@ -3,7 +3,6 @@
 Menu::Menu(SFMLHandler &window)
 {
     window.loadAsset("BUTTON_START","assets/Button_Start.png");
-    window.loadAsset("BUTTON_SCORE","assets/Button_Score.png");
     window.loadAsset("BUTTON_EXIT","assets/Button_Exit.png");
     window.loadAsset("BACKGROUND", "assets/MissileCommand_Background.jpg");
 }
@@ -22,6 +21,9 @@ void Menu::_draw()
 {
     _window.clearWindow();
     _window.draw("BACKGROUND", Position(0, 0));
+    _window.draw("BUTTON_START", Position(WINDOW_WIDTH/2 -130, WINDOW_HEIGHT/2 -300));
+    _window.draw("BUTTON_SCORE", Position(WINDOW_WIDTH/2 -130, WINDOW_HEIGHT/2 -54));
+    _window.draw("BUTTON_EXIT", Position(WINDOW_WIDTH/2 -130, WINDOW_HEIGHT/2 +192));
 }
 
 void	MissileCommand::_pollEvents()
