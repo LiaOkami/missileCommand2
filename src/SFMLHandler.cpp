@@ -115,7 +115,7 @@ bool SFMLHandler::explosionCollides(float radius, Position explosionPos, const s
     explosion.setPosition(exPos);
     //asset
     _mapAssets[key].setPosition(assetPos.x, assetPos.y);
-    return 0;//_mapAssets[key].getGlobalBounds().contains(exPos);
+    return _mapAssets[key].getGlobalBounds().intersects(explosion.getGlobalBounds());
 }
 
 bool SFMLHandler::explosionCollides(float radius1, Position pos1, float radius2, Position pos2)
