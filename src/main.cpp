@@ -1,11 +1,13 @@
 #include <cstdlib>
 #include "MissileCommand.hh"
+#include "Menu.hh"
 
 int     main()
 {
-    MissileCommand        game;
+    MissileCommand      game;
+    //Menu		menu(&(game.getWindow()), &game);
 
-    srand(time(NULL));
     game.launch();
+    srand(time(NULL));
     return (0);
 }
