@@ -66,6 +66,43 @@ public:
    */
   void	loadAsset(const std::string & key, const std::string & filename, float scale, int rotation, int RectLeft, int RectTop, int RectWidth, int RectHeight);
 
+    /** \brief Vérifie si le curseur est dans les bordures d'un asset
+   * \param chaine, clé d'une sprite
+   * \param position de l'objet à vérifier
+   * \return bool
+   */
+  bool cursorHover(const string & key, Position pos);
+
+  /** \brief Vérifie si deux objets se recouvrent
+   * \param chaine, clé du premier sprite
+   * \param position du premier objet à vérifier
+   * \param chaine, clé du second sprite
+   * \param position du second objet à vérifier
+   * \return bool
+   */
+  bool objectIntersects(const string & key1, Position pos1, const string & key2, Position pos2);
+
+  /** \brief Vérifie si un objet entre en collision avec une explosion
+   * \param réel, rayon de l'explosion à vérifier
+   * \param Position, position de l'explosion à vérifier
+   * \param chaine, clé du sprite à vérifier
+   * \param position de l'objet à vérifier
+   * \return bool
+   */
+  bool explosionCollides(float radius, Position explosionPos, const string & key, Position assetPos); //BOF
+
+  /** \brief Vérifie si deux explosions se chevauchent
+   * \param réel, rayon de la première explosion à vérifier
+   * \param Position, position de la première explosion à vérifier
+   * \param réel, rayon de la deuxième explosion à vérifier
+   * \param Position, position de la deuxième explosion à vérifier
+   * \return bool
+   */
+  bool explosionCollides(float radius1, Position pos1, float radius2, Position pos2);
+
+
+  /* AFFICHAGE */
+
   /** \brief Efface les objets affichés dans la fenêtre
    */
   void	clearWindow();
@@ -83,30 +120,19 @@ public:
    */
   void	draw(const std::string & key, Position pos, double rot); // temporaire, pour les tests
 
+    /** \brief Dessine l'objet dans la fenêtre
+   * \param réel, rayon de l'explosion à dessiner
+   * \param Position, position de l'explosion à dessiner
+   */
+   void drawExplosion(float radius, Position pos);
+
   /** \brief Affiche l'ensemble des objet dessinés
-   *
    */
   void  display();
 
   /** \brief Ferme la fenêtre
    */
   void  close();
-
-  /** \brief Vérifie si le curseur est dans les bordures d'un asset
-   * \param chaine, clé d'une sprite
-   * \param position de l'objet à vérifier
-   * \return bool
-   */
-  bool cursorHover(const string & key, Position pos);
-
-  /** \brief Vérifie si deux objets se recouvrent
-   * \param chaine, clé du premier sprite
-   * \param position du premier objet à vérifier
-   * \param chaine, clé du second sprite
-   * \param position du second objet à vérifier
-   * \return bool
-   */
-  bool objectIntersects(const string & key1, Position pos1, const string & key2, Position pos2);
 
 
   /* ACCESSEURS */
