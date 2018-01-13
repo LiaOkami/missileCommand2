@@ -5,7 +5,7 @@
 ## Login   <pierrick.garcia@u-psud.fr>
 ##
 ## Started on  Tue Oct 10 13:52:27 2017 Pierrick Garcia
-## Last update Sat Jan 13 23:31:48 2018 Pierrick Garcia
+## Last update Sat Jan 13 23:43:43 2018 Pierrick Garcia
 ##
 
 COMP		= g++
@@ -31,8 +31,9 @@ SRC		= src/main.cpp \
 		  src/Missile.cpp \
 		  src/Explosion.cpp\
 		  src/City.cpp\
-		  src/Canon.cpp \
-		  src/Menu.cpp
+		  src/Canon.cpp\
+		  src/Menu.cpp\
+		  src/Level.cpp
 
 OBJ		= $(SRC:.cpp=.o)
 

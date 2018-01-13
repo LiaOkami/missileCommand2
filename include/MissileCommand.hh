@@ -10,6 +10,7 @@
 # include "City.hh"
 # include "Explosion.hh"
 # include "SFMLHandler.hh"
+# include "Level.hh"
 
 static const int	WINDOW_WIDTH = 1200;
 static const int	WINDOW_HEIGHT = 900;
@@ -31,6 +32,10 @@ private:
   sf::Time		_dureeMax;
   sf::Time		_dureeApparition;
   unsigned int		score;
+  unsigned int  nbMissileAlly;
+  unsigned int  nbMissileFoe;
+  unsigned int  numLevel;
+
 
 public:
   /** \brief Constructeur par défaut

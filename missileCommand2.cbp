@@ -45,7 +45,9 @@
 		<Unit filename="include/Position.hh" />
 		<Unit filename="include/SFMLHandler.hh" />
 		<Unit filename="src/Canon.cpp" />
+		<Unit filename="src/Canon.o" />
 		<Unit filename="src/City.cpp" />
+		<Unit filename="src/City.o" />
 		<Unit filename="src/Explosion.cpp" />
 		<Unit filename="src/Explosion.o" />
 		<Unit filename="src/Level.cpp" />
