@@ -2,11 +2,11 @@
 #include "MissileCommand.hh"
 #include "SFMLHandler.hh"
 
-Menu::Menu(SFMLHandler &_window, MissileCommand &game)
+Menu::Menu(SFMLHandler &_window, MissileCommand &_game)
 {
-    window.loadAsset("BUTTON_START","assets/Button_Start.png");
-    window.loadAsset("BUTTON_EXIT","assets/Button_Exit.png");
-    window.loadAsset("BACKGROUND", "assets/MissileCommand_Background.jpg");
+    _window.loadAsset("BUTTON_START","assets/Button_Start.png");
+    _window.loadAsset("BUTTON_EXIT","assets/Button_Exit.png");
+    _window.loadAsset("BACKGROUND", "assets/MissileCommand_Background.jpg");
 }
 
 void Menu::launch()
@@ -45,7 +45,7 @@ void	MissileCommand::_pollEvents()
             _window.getMouse().y > WINDOW_HEIGHT/2 -300 &&
             _window.getMouse().y < WINDOW_HEIGHT/2 -192)
             {
-                game.launch();
+                _game.launch();
             }
             if(_window.getMouse().x > WINDOW_WIDTH/2 -150 &&
             _window.getMouse().x < WINDOW_WIDTH/2 +150 &&
