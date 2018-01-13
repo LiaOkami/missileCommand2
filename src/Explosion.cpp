@@ -12,3 +12,13 @@ void	Explosion::update(float time)
   if (_ray > _MAX_RAY)
     _ray = _MAX_RAY;
 }
+
+bool	Explosion::isEnded() const
+{
+  return (_ray > _MAX_RAY);
+}
+
+float	Explosion::getRay() const
+{
+  return _ray;
+}

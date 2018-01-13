@@ -4,7 +4,6 @@
 
 #pragma once
 
-#include "MissileCommand.hh"
 #include "Object.hh"
 
 /** Doxygen todo */
@@ -12,7 +11,7 @@ class Explosion : public Object
 {
 private:
   static constexpr float	_MAX_RAY = 30;
-  static constexpr float	_SPEED = 30;
+  static constexpr float	_SPEED = 1;
   float	_ray;
 
 public:
@@ -32,4 +31,8 @@ public:
      *  Fonction calculant le déplacement du missile à chaque frame
      */
   void	update(float time);
+
+  bool	isEnded() const;
+
+  float	getRay() const;
 };
