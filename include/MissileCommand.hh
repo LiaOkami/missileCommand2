@@ -31,8 +31,10 @@ private:
   sf::Clock		_apparition;
   sf::Time		_dureeMax;
   sf::Time		_dureeApparition;
-  unsigned int		score;
+  unsigned int	score;
   Menu          _menu;
+  unsigned int  nbMissileAlly;
+  unsigned int  nbMissileFoe;
 
 public:
   /** \brief Constructeur par défaut
