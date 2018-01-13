@@ -110,7 +110,7 @@ bool SFMLHandler::objectIntersects(const string & key1, Position pos1, const str
 bool SFMLHandler::explosionCollides(float radius, Position explosionPos, const string & key, Position assetPos)
 {
     //explosion
-    sf::CircleShape explosion(radius,0);
+    sf::CircleShape explosion(radius);
     sf::Vector2f exPos(explosionPos.x,explosionPos.y);
     explosion.setPosition(exPos);
     //asset
@@ -148,12 +148,12 @@ void SFMLHandler::draw(const std::string & key, Position pos, double rot)
 
 void SFMLHandler::drawExplosion(float radius, Position pos)
 {
-    sf::CircleShape explosion(radius,0);
-    sf::Vector2f exPos(pos.x,pos.y);
-    explosion.setPosition(exPos);
+    sf::CircleShape explosion(radius);
+    explosion.setPosition((float)pos.x,(float)pos.y);
     //Couleur
-    sf::Color explosionColor(240,224,83);
+    sf::Color explosionColor((unsigned)240,(unsigned)224,(unsigned)83);
     explosion.setFillColor(explosionColor);
+    //explosion.setFillColor(sf::Color::White);
     std::cout << "Explosion [" << explosion.getPosition().x << "," << explosion.getPosition().y
 	      << "] with " << radius << " rds" <<std::endl;
     _window.draw(explosion);
