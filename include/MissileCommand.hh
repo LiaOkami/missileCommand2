@@ -11,6 +11,7 @@
 # include "Explosion.hh"
 # include "SFMLHandler.hh"
 # include "Menu.hh"
+# include "Level.hh"
 
 static const int	WINDOW_WIDTH = 1200;
 static const int	WINDOW_HEIGHT = 900;
@@ -35,6 +36,7 @@ private:
   Menu          _menu;
   unsigned int  nbMissileAlly;
   unsigned int  nbMissileFoe;
+  unsigned int  numLevel;
 
 public:
   /** \brief Constructeur par défaut

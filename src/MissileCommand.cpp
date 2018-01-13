@@ -3,6 +3,7 @@
 #include "Object.hh"
 #include "Explosion.hh"
 #include "Menu.hh"
+#include "Level.hh"
 #include <vector>
 using namespace std;
 #include <cstdlib>
@@ -38,6 +39,8 @@ void	MissileCommand::launch()
 {
     _menu(_window, this);
     score = 0;
+    numLevel=1;
+    nbMissileFoe=0;
     /* Boucle Principale */
     while (_window.getWindow().isOpen())
     {
@@ -64,11 +67,12 @@ void	MissileCommand::_pollEvents()
 	  UPDATE: Le clic sur l'écran doit envoyer un missile */
 
       if(event.type == sf::Event::MouseButtonPressed &&
-	 event.mouseButton.button == sf::Mouse::Left)
+	 event.mouseButton.button == sf::Mouse::Left && nbMissileAlly>0)
 	{
 	  unsigned int numCanon = _window.getMouse().x / (WINDOW_WIDTH / 3);
 	  _tabMissAlly.push_back(_canons[numCanon].shoot(_window.getMouse()));
 	  cout << "Création d'un missile allié" << endl;
+	  nbMissileAlly--;
 	}
     }
 }
@@ -89,7 +93,7 @@ void	MissileCommand::_update()
 
 
   /** \brief ajoute un missile au tableau de missiles lorsque la durée d'apparition est écoulée */
-  if (_apparition.getElapsedTime() > _dureeApparition)
+  if (_apparition.getElapsedTime() > _dureeApparition && nbMissileFoe>0)
     {
       Position	posBeg(rand() % (_window.getSize().x - 78 / 2) + 78 / 2, 0);
       Position	posEnd(rand() % (_window.getSize().x - 78 / 2) + 78 / 2, 800);
@@ -98,6 +102,7 @@ void	MissileCommand::_update()
       _tabMissFoe.push_back(m1);
       _apparition.restart();
       cout << "Création d'un missile" << endl;
+      nbMissileFoe--;
     }
 
   /** \brief Agrandit les Explosions */
@@ -150,6 +155,12 @@ void	MissileCommand::_update()
 	    Explosion e1(_tabMissAlly[cpt].getPos());
 	    //Supprimer du vecteur le missile
 	}
+    }
+
+    if(nbMissileFoe<=0 && _tabMissFoe.size()==0)
+    {
+        numLevel++;
+        defLevel(numLevel, nbMissileAlly, nbMissileFoe);
     }
 }
 
