@@ -1,13 +1,15 @@
 #ifndef LEVEL_H
 #define LEVEL_H
+#include "MissileCommand.hh"
 
 
 class Level
 {
     public:
         Level();
-        void defLevel(int numLevel, int &nbMissileAlly, int &nbMissileFoe);
     private:
 };
+
+void defLevel(unsigned int numLevel, unsigned int &nbMissileAlly, unsigned int &nbMissileFoe);
 
 #endif // LEVEL_H
