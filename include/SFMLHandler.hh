@@ -89,7 +89,7 @@ public:
    * \param position de l'objet à vérifier
    * \return bool
    */
-  bool explosionCollides(float radius, Position explosionPos, const string & key, Position assetPos); //BOF
+  bool explosionCollides(float radius, Position explosionPos, const string & key, Position assetPos); //Pas fini
 
   /** \brief Vérifie si deux explosions se chevauchent
    * \param réel, rayon de la première explosion à vérifier
